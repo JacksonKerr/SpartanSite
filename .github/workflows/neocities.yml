@@ -1,12 +1,12 @@
 name: Deploy to neocities
 
-# only run on changes to main. Use main or master depending on whatever your default branch is called.
+# On changes to master
 on:
   push:
     branches:
       - master
 
-concurrency: # prevent concurrent deploys doing strange things
+concurrency: # prevent concurrent deploys
   group: deploy-to-neocities
   cancel-in-progress: true
 
@@ -24,4 +24,4 @@ jobs:
         cleanup: true # Automatically delete files on neocities that don't exist in the repo
         neocities_supporter: false # set this to true if you have a supporter account and want to bypass unsuported files filter.
         preview_before_deploy: true # print a deployment plan prior to waiting for files to upload.
-        dist_dir: public
+        dist_dir: /
