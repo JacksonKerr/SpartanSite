@@ -6,7 +6,6 @@
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>🐙</text></svg>">
     <title>Qaz's Site</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         table,
         th,
@@ -21,26 +20,179 @@
         Jackson Kerr's Site
     </h1>
     <h3 style="margin: 0; text-align: center;">A Spartan web project</h3>
-
+    <h3 style="margin: 0; text-align: center;">
+        <a href="#musings">Musings</a> /
+        <a href="#links">Links</a>
+    </h3>
     <main style="padding: 20px 0 20px 0; margin: auto; max-width: 750px;">
 
-        <div>
+        <div id="musings">
             <hr>
-            <h2 style="text-align: center; margin: 0;"><u>Blog:</u></h2>
+            <h2 style="text-align: center; margin: 0;"><u>Musings:</u></h2>
             <hr>
-            <div>
-                <h4>What I've been up to - 2025-02-01 (<a href="https://www.youtube.com/watch?v=clTNHjEpUSE">Youtube
-                        Link</a>)</h4>
+
+            <details>
+                <style>
+                    @font-face {
+                    font-family: 'minimono';
+                    src: url(data:font/truetype;charset=utf-8;base64,AAEAAAALAIAAAwAwRFNJRwAAAAEAAC8UAAAACE9TLzJyVG1mAAABOAAAAGBjbWFwQRVFIAAAAygAAAIEZ2x5ZtpD++UAAAbAAAAeeGhlYWQrJ2JQAAAAvAAAADZoaGVhC0IEgAAAAPQAAAAkaG10eK3EDR4AAAGYAAABkGxvY2EABeoQAAAFLAAAAZRtYXhwAGsAIwAAARgAAAAgbmFtZU9HDRkAACU4AAAJu3Bvc3QAzwBmAAAu9AAAACAAAQAAAAEAANx/aXNfDzz1AAAIAAAAAADj1wxgAAAAAOPXDGAAAP23BGUG2wAAAAgAAgABAAAAAAABAAAG2/23AAAFiQAAANsEZQABAAAAAAAAAAAAAAAAAAAAZAABAAAAZAAhAAYAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAIETAGQAAUABAQABAAAAP7cBAAEAAAABAAAZgGZAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAEZTVFIAQAAgIB0Ftv23AAAG2wJJIAEB/83/AAADbQW2AAAAIAAABYkAAARJAAAESQEkBEkAAARJAAAESQAABEkAAARJAAAESQEkBEkAAARJAJIESQAABEkAAARJASQESQAABEkBJARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkBJARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQCSBEkAAARJAAAESQEkBEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQEkBEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQAABEkAAARJAAAESQCSBEkBJARJAAAESQAABEkBJARJASQESQAABEkAAAAAAAIAAAADAAAAFAADAAEAAAEMAAQA+AAAAAgACAACAAAAfiAZIB3//wAAACAgGCAc////4eBI4EYAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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AAADbQW2AAUAAAEBAQEBAQJJAAD9twAAA20AAAAABJIAAAEkAAD6SgADAAAAAANtBbYAAwAHAAsAAAEBAQEBAQEBAQEBAQJJAAD+2wAAASUAAP7bAAD+3AAAA20AAAEkASUAAP7bAkkBJQAA/tv8kwW2AAD6SgAAAAIAAAAAA20FtgADAAkAAAEBAQEBAQEBAQECSQAA/tsAAAElAAD9twAAA20AAANtASUAAP7b/JMCSQAAA20AAPpKAAAAAgEkASQCSQSSAAMABwAAAQEBAQEBAQEBJAAAASUAAP7bAAABJQAAASQBJQAA/tsCSQElAAD+2wADAAAAAAJJBJIAAwAHAAsAAAEBAQEBAQEBAQEBAQAAAAABJAAAAAAAAAElAAD+2wAAASUAAAAAASQAAP7cASQBJQAA/tsCSQElAAD+2wAAAAUAAAAAA20FtgADAAcACwAPABMAAAEBAQEBAQEBAQEBAQEBAQEBAQEBAkkAAAEkAAD9twAAASUAAP23AAABJAAAAAAAAAElAAAAAAAAASQAAAAAASQAAP7cASQBJQAA/tsBJQEkAAD+3AEkASUAAP7bASUBJAAA/twAAAACAAABJANtBJIAAwAHAAABAQEBAQEBAQAAAAADbQAA/JMAAANtAAABJAElAAD+2wJJASUAAP7bAAUAAAAAA20FtgADAAcACwAPABMAAAEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAEkAAAAAAAAASUAAAAAAAABJAAA/bcAAAElAAD9twAAASQAAAAAASQAAP7cASQBJQAA/tsBJQEkAAD+3AEkASUAAP7bASUBJAAA/twAAAAEAAAAAANtBbYAAwAHAAsADwAAAQEBAQEBAQEBAQEBAQEBAQEkAAABJQAA/tsAAAElAAAAAAAAASQAAPyTAAACSQAAAAABJAAA/twCSQEkAAD+3AEkASUAAP7bASUBJAAA/twAAQAAAAADbQNtAAMAAAEBAQEAAAAAA20AAAAAA20AAPyTAAAAAgAAAAADbQW2AAMACwAAAQEBAQEBAQEBAQEBAkkAAP7bAAD+3AAAA20AAP7cAAD+2wAAA20BJQAA/tv8kwW2AAD6SgAAAkkAAP23AAMAAAAAA20FtgADAAcAEAAAAQEBAQEBAQEBAQEBAQEBAQECSQAA/tsAAAElAAD+2wAA/twAAAJJASQA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/bf9twAA/twAAQAAAAAC2wW2AAcAAAEBAQEBAQEBAAAAAALbAAD+SQAAAbcAAAAABbYAAP7cAAD8kgAA/twAAAADAAAAAANtBbYAAwAHAAsAAAEBAQEBAQEBAQEBAQJJAAABJAAA/bcAAAElAAD9twAAASQAAAAAASQAAP7cASQDbgAA/JIDbgEkAAD+3AAAAAEAkgAAA20FtgAHAAABAQEBAQEBAQCSAAABtwAA/kkAAALbAAAAAAEkAAADbgAAASQAAPpKAAAAAwAAA20DbQW2AAMABwALAAABAQEBAQEBAQEBAQEAAAAAASQAAAElAAABJAAA/bcAAAElAAADbQElAAD+2wAAASUAAP7bASUBJAAA/twAAAABAAAAAANtASQAAwAAAQEBAQAAAAADbQAAAAABJAAA/twAAAACASQCSQNtBbYAAwAHAAABAQEBAQEBAQJJAAABJAAA/bcAAAElAAACSQEkAAD+3AEkAkkAAP23AAIAAAAAA20DbQADAAsAAAEBAQEBAQEBAQEBAQAAAAABJAAAAAAAAAElAAD+2wAAAkkAAAEkASUAAP7b/twBJAAAASUAAAEkAAD8kwACAAAAAANtBbYAAwANAAABAQEBAQEBAQEBAQEBAQJJAAABJAAA/JMAAAEkAAABJQAA/tsAAAElAAABJAElAAD+2/7cBbYAAP23AAD+3AAA/tsAAP7cAAAAAQAAAAADbQNtAAcAAAEBAQEBAQEBAAAAAANtAAD9twAAAkkAAAAAA20AAP7cAAD+2wAA/twAAAACAAAAAANtBbYAAwANAAABAQEBAQEBAQEBAQEBAQAAAAABJAAAAAAAAAElAAD+2wAAASUAAAEkAAABJAElAAD+2/7cASQAAAElAAABJAAAAkkAAPpKAAAAAgAAAAADbQNtAAMADQAAAQEBAQEBAQEBAQEBAQECSQAA/tsAAP7cAAADbQAA/bcAAAElAAABJAAAAkkAkgAA/279twNtAAD+SQAA/twAAACSAAD+3AAAAAMAAAAAA20FtgAHAAsADwAAAQEBAQEBAQEBAQEBAQEBAQAAAAABJAAAASUAAP7bAAABJQAAASQAAP23AAABJQAAAAAEkgAA/kkAAP9uAAD9twNtASUAAP7bASUBJAAA/twAAAADAAD9twNtA20AAwAHABEAAAEBAQEBAQEBAQEBAQEB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ABMAKQREAAEAAAAAAQAADARtAAMAAQQJAAAANAR5AAMAAQQJAAEACAStAAMAAQQJAAIADgS1AAMAAQQJAAMACATDAAMAAQQJAAQAGATLAAMAAQQJAAUAFgTjAAMAAQQJAAYACAT5AAMAAQQJAAcAVgUBAAMAAQQJAAgALAVXAAMAAQQJAAkAFgWDAAMAAQQJAAoAQgWZAAMAAQQJAAsAdAXbAAMAAQQJAAwAegZPAAMAAQQJAA0AQgbJAAMAAQQJABMAUgcLAAMAAQQJAQAAGAddAEMAbwBwAHkAcgBpAGcAaAB0ACAAagBhAGMAawBzAG8AbgBrAGUAcgByACAAMgAwADIANQBNAGkAbgBpAFIAZQBnAHUAbABhAHIATQBpAG4AaQBNAGkAbgBpACAAUgBlAGcAdQBsAGEAcgBWAGUAcgBzAGkAbwBuACAAMQAuADAATQBpAG4AaQBGAG8AbgB0AFMAdAByAHUAYwB0ACAAaQBzACAAYQAgAHQAcgBhAGQAZQBtAGEAcgBrACAAbwBmACAARgBvAG4AdABTAHQAcgB1AGMAdAAuAGMAbwBtAGgAdAB0AHAAcwA6AC8ALwBmAG8AbgB0AHMAdAByAHUAYwB0AC4AYwBvAG0AagBhAGMAawBzAG8AbgBrAGUAcgByIBwATQBpAG4AaSAdACAAdwBhAHMAIABiAHUAaQBsAHQAIAB3AGkAdABoACAARgBvAG4AdABTAHQAcgB1AGMAdAAKAGgAdAB0AHAAcwA6AC8ALwBmAG8AbgB0AHMAdAByAHUAYwB0AC4AYwBvAG0ALwBmAG8AbgB0AHMAdAByAHUAYwB0AGkAbwBuAHMALwBzAGgAbwB3AC8AMgA2ADIANQAwADQANAAvAG0AaQBuAGkALQA5ADUAaAB0AHQAcABzADoALwAvAGYAbwBuAHQAcwB0AHIAdQBjAHQALgBjAG8AbQAvAGYAbwBuAHQAcwB0AHIAdQBjAHQAbwByAHMALwBzAGgAbwB3AC8AMgA1ADcAMgA4ADEAMwAvAGoAYQBjAGsAcwBvAG4AawBlAHIAcgBGAG8AbgB0AFMAdAByAHUAYwB0ACAATgBvAG4ALQBDAG8AbQBtAGUAcgBjAGkAYQBsACAATABpAGMAZQBuAHMAZQBGAGkAdgBlACAAYgBpAGcAIABxAHUAYQBjAGsAaQBuAGcAIAB6AGUAcABoAHkAcgBzACAAagBvAGwAdAAgAG0AeQAgAHcAYQB4ACAAYgBlAGQAQQBBADgASwBjAEYAbABnAFcAZwA9AD1Db3B5cmlnaHQgamFja3NvbmtlcnIgMjAyNU1pbmlSZWd1bGFyTWluaU1pbmkgUmVndWxhclZlcnNpb24gMS4wTWluaUZvbnRTdHJ1Y3QgaXMgYSB0cmFkZW1hcmsgb2YgRm9udFN0cnVjdC5jb21odHRwczovL2ZvbnRzdHJ1Y3QuY29tamFja3NvbmtlcnLSTWluadMgd2FzIGJ1aWx0IHdpdGggRm9udFN0cnVjdGh0dHBzOi8vZm9udHN0cnVjdC5jb20vZm9udHN0cnVjdGlvbnMvc2hvdy8yNjI1MDQ0L21pbmktOTVodHRwczovL2ZvbnRzdHJ1Y3QuY29tL2ZvbnRzdHJ1Y3RvcnMvc2hvdy8yNTcyODEzL2phY2tzb25rZXJyRm9udFN0cnVjdCBOb24tQ29tbWVyY2lhbCBMaWNlbnNlRml2ZSBiaWcgcXVhY2tpbmcgemVwaHlycyBqb2x0IG15IHdheCBiZWRBQThLY0ZsZ1dnPT0AQwBvAHAAeQByAGkAZwBoAHQAIABqAGEAYwBrAHMAbwBuAGsAZQByAHIAIAAyADAAMgA1AE0AaQBuAGkAUgBlAGcAdQBsAGEAcgBNAGkAbgBpAE0AaQBuAGkAIABSAGUAZwB1AGwAYQByAFYAZQByAHMAaQBvAG4AIAAxAC4AMABNAGkAbgBpAEYAbwBuAHQAUwB0AHIAdQBjAHQAIABpAHMAIABhACAAdAByAGEAZABlAG0AYQByAGsAIABvAGYAIABGAG8AbgB0AFMAdAByAHUAYwB0AC4AYwBvAG0AaAB0AHQAcABzADoALwAvAGYAbwBuAHQAcwB0AHIAdQBjAHQALgBjAG8AbQBqAGEAYwBrAHMAbwBuAGsAZQByAHIgHABNAGkAbgBpIB0AIAB3AGEAcwAgAGIAdQBpAGwAdAAgAHcAaQB0AGgAIABGAG8AbgB0AFMAdAByAHUAYwB0AAoAaAB0AHQAcABzADoALwAvAGYAbwBuAHQAcwB0AHIAdQBjAHQALgBjAG8AbQAvAGYAbwBuAHQAcwB0AHIAdQBjAHQAaQBvAG4AcwAvAHMAaABvAHcALwAyADYAMgA1ADAANAA0AC8AbQBpAG4AaQAtADkANQBoAHQAdABwAHMAOgAvAC8AZgBvAG4AdABzAHQAcgB1AGMAdAAuAGMAbwBtAC8AZgBvAG4AdABzAHQAcgB1AGMAdABvAHIAcwAvAHMAaABvAHcALwAyADUANwAyADgAMQAzAC8AagBhAGMAawBzAG8AbgBrAGUAcgByAEYAbwBuAHQAUwB0AHIAdQBjAHQAIABOAG8AbgAtAEMAbwBtAG0AZQByAGMAaQBhAGwAIABMAGkAYwBlAG4AcwBlAEYAaQB2AGUAIABiAGkAZwAgAHEAdQBhAGMAawBpAG4AZwAgAHoAZQBwAGgAeQByAHMAIABqAG8AbAB0ACAAbQB5ACAAdwBhAHgAIABiAGUAZABBAEEAOABLAGMARgBsAGcAVwBnAD0APQAAAwAAAAAAAADMAGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA) format('truetype');
+                    font-weight: normal;
+                    font-style: normal;
+                }
+                </style>    
+
+                <summary><h4 style="display: inline; font-family: 'minimono';">I made a font and why we shouldn't write about tools - 2025/02/16</h4></summary>
+                <p>
+                    If I break my own rules only before I state them, maybe I'll get away with it.
+                </p>
+                <p style="font-family: 'minimono';">
+                    It is my goal that everything on my site (except the links section but duh) should be made by me. 
+                    I don't really want to respond directly to other media. I want to create new things. Recently I came to the 
+                    horrible realisation that every time this page is loaded, it's using a font made by someone else. Even worse,
+                    that font can be different depending on what browser/device you use which sometimes caused things to be slightly
+                    out of alignment.
+                </p>
+                <p style="font-family: 'minimono';">
+                    The simple solution was to make my own font. As you probably guessed, this is it. Here's all the characters:
+                </p>
+                <p style="font-family: 'minimono'; font-size: 25px;">
+                    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                    <br/>
+                    abcdefghijklmnopqrstuvwxyz
+                    <br/>
+                    0123456789
+                    <br/>
+                    !@#$%^&*()-=_+[]{};:'"<>,./?`~
+                </p>
+                <p style="font-family: 'minimono';">
+                    I went for a minimal blocky look. It's fine. The file size is small, but it's no work of art.
+                </p>
+                <p>
+                    Do you care about this? Is this interesting to anyone except for me? Should I care if it isn't?
+                </p>
+                <p>
+                    In making this font, I considered that this might be a good thing to write about until I considered;
+                    Are most of the entries on this site just going to be about making this site? And if so, is that interesting?
+                </p>
+                <p style="font-family: 'minimono';">
+                    No, I don't think it is...
+                </p>
+                <p>
+                    A blog about making a blog is only interesting to someone learning how to make a blog, and even then maybe 
+                    just as a means to an end. Sculptors don't spend all day making statues of chisels, and the best books
+                    aren't about publishing or overcoming writers block. These examples seem silly but for some reason, on the
+                    internet (and especially the blog space) people seem to constantly write about writing on the internet.
+                </p>
+                <p>
+                    I aim to avoid this from now on.
+                </p>
+                <p>
+                    Oh, and by the way. I'm not happy enough with this font to go on using it for the whole site. 
+                    I may get around to making another one.
+                </p>
+                <p>
+                    Peace out
+                </p>
+            </details> 
+
+            <details>
+                <summary><h4 style="display: inline">Dumbphone for a Dumb bro - 2025/02/10</h4></summary>
+                <p>
+                    I've been using a "dumbphone" for I think about a year now. It can only use SMS and make/receive calls. 
+                    It has no internet connection. I hold this as one of the best decisions I ever made.
+                </p>
+                <p>
+                    Although I had already taken steps to limit my social media; I had deleted Instagram and Facebook off of 
+                    my smartphone a year prior. Here in New Zealand most people I know use Facebook Messenger as their main 
+                    avenue for communication. I was worried about losing contact with friends and family. Ah, the dreaded FOMO.
+                    Eventually I decided to try it "just for a couple of days". I grabbed an $80 candy bar phone on my way home 
+                    from work and all my apprehensions melted away.
+                </p>
+                <p>
+                    Well, what about that FOMO?
+                </p>
+                <p>
+                    It turns out that for the most part people who care about you are willing to send you a text message instead
+                    of a Facebook DM. And I started treating the group chat more like an email chain. I could check it on my computer 
+                    at work an hour before leaving work to see if there were any invites to events and that pretty much solved 
+                    my problem.
+                </p>
+                <p>
+                    What about banking? I set up my debit card so that CHQ/Paywave accesses my weekly budget and SAV accesses my 
+                    short term savings. This means that if I will never be somewhere and not have access to money. Maps? I look 
+                    up the directions before I leave, if it's complicated I'll write them down in a notebook I carry. Email? 
+                    Why do you need to see emails at the pub??? Do it when you get home!
+                </p>
+                <p>
+                    Ok, here's the part where I admit that I've been lying to you. It turned out that I actually couldn't live my
+                    normal life without a smartphone. My work, my bank, steam, and a lot of other things require an authenticator 
+                    app for login. My gym requires an app FFS. Also, what if I want to listen to music? Well... For this I still
+                    use a smartphone and a Digital Audio Plater (effectively a tiny android tablet). The smartphone stays in my
+                    drawer at work and the DAP stays at home.
+                </p>
+                <p>
+                    So far I've only talked about the issues with using a dumbphone. If you're a full time smartphone user 
+                    this whole thing probably sounds silly to you. It did to me the first time I heard about someone using
+                    a candybar phone in the 2020s. Modern smartphones are arguably the most effective tool that humanity has 
+                    ever created. Why would anyone want to give that up? Put simply, 
+                    <a href="https://www.youtube.com/watch?v=ke0lFon3UhU&list=PLgKGxseK8LoUg9T4YT4DsQEBRLoTltEKd&index=62">
+                        there are hidden costs to owning a smartphone 
+                    </a>.
+                </p>
+                <p>
+                    Although I was already vigilant about managing notifications and unsubscribing from bullshit emails,
+                    there are always things that slip through the cracks. Do I really need that group chat notification
+                    in the middle of fixing an issue at work? Or when enjoying time with friends? The benefit of the
+                    dumbphone is that I know that when it beeps, someone is actively trying to get in contact with me 
+                    specifically. Not just someone sending me a meme or sharing a post.
+                </p>
+                <p>
+                    I've found that since switching, my time out of the house has had a completely different vibe to it.
+                    There are few objects in out lives that spend the same amount of time with us as out phones so a change
+                    effects a lot more of you life than you may thing. I no longer have a 24/7 entertainment machine on me 
+                    at all times. Whenever I am out of the house, I am present. The lack of a phone changes sitting in a waiting
+                    room, being on the bus, or otherwise waiting somewhere. When I'm bored I'm compelled to talk to the people
+                    around me, take in my surroundings, or just go into my own mind. When I wake up in the morning I get 
+                    straight out of bed. No more wasted time scrolling. I've also noticed that I sleep much better. Something
+                    else I did not expect is how much more I notice the people around me being on their phones.
+                </p>
+                <p>  
+                    Using a dumbphone is one of those things where the drawbacks are clear, but the benefits are indirect. You
+                    really need to give it a go to know what you will gain and whether the drawbacks will actually apply to you.
+                    I implore you to give it a go, even just to try it out for a couple of days. The only piece of advice I will
+                    give to you is that 
+                    <a href="https://www.youtube.com/watch?v=IwUcSMfBilY">there is no such thing as the perfect dumbphone</a>.
+                    So don't get hung up on finding it. Just walk into the store and buy the cheapest one available. If you must 
+                    have a specific recommendation; the 
+                    <a href="https://www.tcl.com/my/en/feature-phones/tcl-4042s">TCL Onetouch 4042</a>.
+                    is very simple to use and I have had no issues with it.
+                </p>
+                <p>
+                    Most phones have a screen time feature, check it and see if that would convince you. Do you think you are going
+                    to look back in 5 years and wish you spent more time staring at a screen or less. The quote "The only people 
+                    that will remember you worked late are your kids" has always stuck with me and I think applies here.
+                </p>
+                <p>
+                    Go on, see if those T9 typing skills are still in the mind palace somewhere.
+                </p>
+            </details> 
+
+            <details>
+                <summary><h4 style="display: inline">What I've been up to (
+                    <a href="https://www.youtube.com/watch?v=clTNHjEpUSE">On Youtube</a> /
+                    <a href="https://www.dailymotion.com/video/k37CbMpIjFKmOqCmzpm">On DailyMotion</a>
+                    ) - 2025/02/01
+                </h4></summary>
                 <p>
                     Assorted videos from a cheap camera I bought on TradeMe in early 2024 overlaid with me
                     singing a cover of
                     <a href="https://www.youtube.com/watch?v=V3kHahUZp40">Like a brother by <i>hey,
                             nothing</i></a>.
                 </p>
-            </div>
+            </details> 
 
-            <div>
-                <h4>Evan Monsma and this site - Written 2025-01-23</h4>
+            <details>
+                <summary><h4 style="display: inline">Evan Monsma and this site - 2025/01/23</h4></summary>
                 <p>
                     In the last year or so I have made an effort to change the type of content I have been
                     consuming.
@@ -67,22 +219,20 @@
 
                     Evan uses the end-tag "Made for the sake of making" which speaks to me.
                 </p>
-            </div>
+            </details> 
 
-
-            <div>
-                <h4>Welcome - Written 2025-01-22</h4>
+            <details>
+                <summary><h4 style="display: inline">Welcome - 2025/01/22</h4></summary>
                 <p>
                     I was inspired to create this site by
                     <a href="https://melonking.net/thoughts/manifesto">The Melonking Manifesto</a>
                     but there's not much to see here yet... In the meantime, have a
                     <a href="https://skysedge.com/work/index.html">cool link</a> to explore.
                 </p>
-            </div>
+            </details> 
         </div>
 
-
-        <div>
+        <div id="links">
             <hr>
             <h2 style="text-align: center;"><u>Links I Like:</u></h2>
             <hr>
@@ -113,6 +263,12 @@
                             href="https://htmlpreview.github.io/?https://github.com/JacksonKerr/SimpleWebsite/blob/master/public/index.html">htmlpreview.github.io</a>
                     </td>
                     <td>A tool allowing you to view rendered github html files directly in browser.</td>
+                </tr>
+                <tr>
+                    <td><a
+                            href="https://ifedapoolarewaju.github.io/nojs-site/">No.js</a>
+                    </td>
+                    <td>A js library that lets you create websites without writing any javascript.</td>
                 </tr>
             </table>
 
@@ -164,9 +320,6 @@
                 </tr>
             </table>
         </div>
-
-
-
     </main>
 
     <div style="text-align: center; max-width: 750px; margin: auto;">
@@ -175,6 +328,7 @@
         </h2>
         <h4 style="margin: 0;">JacksonKerr2@gmail.com</h4>
     </div>
+    
 </body>
 
 </html>
