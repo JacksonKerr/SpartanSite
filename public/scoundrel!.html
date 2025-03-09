@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>🐙</text></svg>">
+        <title>Qaz's Site</title>
+        <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+    </head>
+
+    <body style="padding: 10px;">
+        <main style="padding: 20px 0 20px 0; margin: auto; max-width: 750px;">
+            <hr>
+            <h2 style="margin: 0; text-align: center; "><u>Scoundrel!</u></h2>
+            <hr>
+
+            <div style="text-align: center;">
+                <button id="startGameButton"><h3>Reset Game</h3></button>
+
+                <div id="playerHealth" style="color: red; font-size: 35pt; "></div>
+                <style>
+                    #playArea div button {
+                        font-size: 70pt; 
+                        border: none;
+                        width: 100%;
+                    }
+                    #playArea div {
+                        width: 100%;
+                        margin: 1px;
+                    }
+                </style>
+                <div id="playArea" style="display: flex;">
+                    <div style="outline: solid black 1px;">
+                        <button style="color: red;">🂠</button>
+                        <button id="cardsRemainingInDungeon"></button>
+                    </div>
+                    <div>
+                        <button id="roomCard1"></button>
+                        <button style="display: none;"
+                            id="roomCard1">👊</button>
+                        <br />
+                        <button style="display: none;"
+                            id="roomCard1Barehand">👊</button>
+                    </div>
+                    <div>
+                        <button id="roomCard2"></button>
+                        <br />
+                        <button style="display: none;"
+                            id="roomCard2Barehand">👊</button>
+                    </div>
+                    <div>
+                        <button id="roomCard3"></button>
+                        <br />
+                        <button style="display: none;"
+                            id="roomCard3Barehand">👊</button>
+                    </div>
+                    <div>
+                        <button id="roomCard4"></button>
+                        <br />
+                        <button style="display: none;"
+                            id="roomCard4Barehand">👊</button>
+                    </div>
+
+                    <div style="outline: solid black 1px;">
+                        <button id="currentWeapon"></button>
+                        <button id="creatureStack"></button>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <script>
+            const SPADES = 'spades';
+            const CLUBS = 'clubs'
+            const HEARTS = 'hearts';
+            const DIAMONDS = 'diamonds';
+            const JOKER = 'joker';
+
+            const ROOM_SIZE = 4;
+            const MAX_PLAYER_HEALTH = 20;
+            const FLOOR_SIZE_TO_REDEAL = 1;
+
+            function getShuffledDeck() {
+                let shuffledDeck = [];
+
+                // get a deck of cards
+                for (const suit of [SPADES, CLUBS, HEARTS, DIAMONDS])
+                    for (let rank = 2; rank <= 14; rank += 1)
+                    shuffledDeck.push({ suit, rank });
+
+                // TODO: Here we are excluding red face cards. They should instead
+                // have another card dealt on top of them and then have their
+                // status effects.
+                shuffledDeck = shuffledDeck.filter(
+                    c => !([HEARTS, DIAMONDS].includes(c.suit)
+                    && c.rank > 10)
+                );
+                shuffledDeck.push({ suit: 'joker', rank: 0 });
+                shuffledDeck.push({ suit: 'joker', rank: 0 });
+                
+                for (let i = shuffledDeck.length - 1; i >= 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [
+                        shuffledDeck[i], 
+                        shuffledDeck[j]
+                    ] = [
+                        shuffledDeck[j],
+                        shuffledDeck[i]
+                    ];
+                }
+
+                return shuffledDeck;
+            }
+
+            function getNewGameObject() {
+                let shuffledDeck = getShuffledDeck();
+
+                const currentFloor = [];
+                for (let i = 0; i < ROOM_SIZE; i += 1)
+                    currentFloor.push(shuffledDeck.pop());
+
+                return {
+                    dungeon: shuffledDeck,
+                    currentFloor: {
+                        healingPotionUsed: false,
+                        cards: currentFloor,
+                    },
+                    currentWeapon: null,
+                    creaturesDefeatedByCurrentWeapon: [],
+                    playerHealth: 20
+                };
+            }
+
+            // TODO: What happens as you approach the end of the game?
+            // TODO: Add the ability to skip one room in a row
+            function selectRoomCard(card, gameData, options) { 
+                if (gameData.playerHealth < 1)
+                    throw "Cannot attack when the player is dead";
+
+                if ([SPADES, CLUBS].includes(card.suit)) {
+                    if (options?.bareHand) {
+                        gameData.playerHealth -= card.rank;
+                    } else {
+                        if (gameData.currentWeapon == null)
+                            throw "Must barehand creature if you have no weapon";
+                        const rankOfSmallestCritterSlainByWeapon = Math.min(
+                            ...gameData.creaturesDefeatedByCurrentWeapon.map(c => c.rank)
+                        );
+                        if (rankOfSmallestCritterSlainByWeapon <= card.rank)
+                            throw "Cannot use weapon on a creature which is larger than the smallest"
+                                + "creature it has been used to slay";
+                        gameData.playerHealth -= Math.max(0, card.rank - (gameData.currentWeapon?.rank || 0));
+                        if (gameData.currentWeapon != null)
+                            gameData.creaturesDefeatedByCurrentWeapon.push(card);
+                    }
+                } else if (card.suit == HEARTS) {
+                    if (!gameData.currentFloor.healingPotionUsed) {
+                        gameData.playerHealth += card.rank;
+                        if (gameData.playerHealth > MAX_PLAYER_HEALTH)
+                            gameData.playerHealth = MAX_PLAYER_HEALTH;
+                        gameData.currentFloor.healingPotionUsed = true;
+                    }
+                } else if (card.suit == DIAMONDS) {
+                    gameData.currentWeapon = card;
+                    gameData.creaturesDefeatedByCurrentWeapon = [];
+                } else if (card.suit == JOKER) {
+                    gameData.currentWeapon = null;
+                    gameData.creaturesDefeatedByCurrentWeapon = [];
+                }
+
+                // remove card from room
+                gameData.currentFloor.cards
+                    [gameData.currentFloor.cards.findIndex(c => c == card)] = null;
+
+                // if room only has only one card left, deal more
+                if (gameData.currentFloor.cards.filter(c => c != null).length <= FLOOR_SIZE_TO_REDEAL) {
+                    while (gameData.currentFloor.cards.filter(c => c != null).length < ROOM_SIZE) {
+                        const emptyCardSlotIndex = gameData.currentFloor.cards.findIndex(c => c == null);
+                        gameData.currentFloor.cards[emptyCardSlotIndex] = gameData.dungeon.pop();
+                    }
+                    gameData.currentFloor.healingPotionUsed = false;
+                }
+
+                updateUI(gameData);
+            }
+            
+            function startGame() {
+                gameData = getNewGameObject();
+                updateUI(gameData);
+            }
+            document.getElementById('startGameButton').onclick = startGame;
+
+
+            const cardDisplays = {}
+            cardDisplays[SPADES] = { 2: '🂢', 3: '🂣', 4: '🂤', 5: '🂥', 6: '🂦', 7: '🂧', 8: '🂨', 9: '🂩', 10: '🂪', 11: '🂫', 12: '🂭', 13: '🂮', 14: '🂡', };
+            cardDisplays[CLUBS] = { 2: '🃒 ', 3: '🃓', 4: '🃔 ', 5: '🃕', 6: '🃖 ', 7: '🃗 ', 8: '🃘 ', 9: '🃙 ', 10: '🃚 ', 11: '🃛', 12: '🃝', 13: '🃞', 14: '🃑', };
+            cardDisplays[HEARTS] = { 2: '🂲', 3: '🂳', 4: '🂴', 5: '🂵', 6: '🂶', 7: '🂷', 8: '🂸', 9: '🂹', 10: '🂺', 11: '🂻', 12: '🂽', 13: '🂾', 14: '🂱', };
+            cardDisplays[DIAMONDS] = { 2: '🃂', 3: '🃃', 4: '🃄', 5: '🃅', 6: '🃆', 7: '🃇', 8: '🃈', 9: '🃉', 10: '🃊', 11: '🃋', 12: '🃍', 13: '🃎', 14: '🃁', };
+            cardDisplays[JOKER] = { 0: '🂿' };
+
+            /* UI Handling */
+            function updateUI(newGameData) {
+                const cardDisplay = function(suit, rank) {
+                    if ([SPADES, CLUBS].includes(suit))
+                        return cardDisplays[suit][rank];
+                    return '<span style="color: red">' + cardDisplays[suit][rank] + '</span>'
+                };
+
+                console.log(gameData)
+                // Update remaining cards in dungeon
+                document.getElementById('cardsRemainingInDungeon')
+                    .innerHTML = newGameData.dungeon.length;
+                // Update room
+                const roomCards = newGameData.currentFloor.cards;
+                for (let cardIndex = 0; cardIndex < ROOM_SIZE; cardIndex += 1) {
+                    const currentCard = roomCards[cardIndex];
+
+                    const roomCardUiElement = document
+                        .getElementById('roomCard' + (cardIndex + 1));
+                    const roomCardBareHandUiElement = document
+                        .getElementById('roomCard' + (cardIndex + 1) + 'Barehand');
+                    if (currentCard == null) {
+                        roomCardUiElement.onclick = null;
+                        roomCardBareHandUiElement.onclick = null;
+                        roomCardUiElement.innerHTML = null;
+                        roomCardBareHandUiElement.style.display = 'none';
+                    } else {
+                        roomCardUiElement.onclick = (() => selectRoomCard(currentCard, gameData));
+                        roomCardBareHandUiElement.onclick = (() => selectRoomCard(currentCard, gameData, { bareHand: true }));
+                        
+                        if ([CLUBS, SPADES].includes(currentCard.suit)) {
+                            console.log(currentCard);
+                            roomCardBareHandUiElement.style.display = '';
+                        }
+                        else roomCardBareHandUiElement.style.display = 'none';
+                        roomCardUiElement.innerHTML = cardDisplay(currentCard.suit, currentCard.rank);
+                    }
+                }
+
+                // Update weapon
+                if (newGameData.currentWeapon != null) {
+                    document.getElementById('currentWeapon').innerHTML = cardDisplay(
+                        newGameData.currentWeapon?.suit, 
+                        newGameData.currentWeapon?.rank
+                    );
+                } else document.getElementById('currentWeapon').innerHTML = null;
+                    
+                // TODO: Update creatures stacked on current weapon
+                let smallestRankedCritterSlainByCurrentWeapon = Math.min(
+                    ...newGameData.creaturesDefeatedByCurrentWeapon.map(c => c.rank)
+                )
+                if (smallestRankedCritterSlainByCurrentWeapon > 999999)
+                    smallestRankedCritterSlainByCurrentWeapon = null;
+                document.getElementById('creatureStack')
+                    .innerHTML = smallestRankedCritterSlainByCurrentWeapon;
+
+                // update plater health
+                let healthBar = "";
+                for (let i = 0; i < MAX_PLAYER_HEALTH; i += 1) {
+                    healthBar += i < newGameData.playerHealth ? '■' : '□';
+                }
+                document.getElementById('playerHealth')
+                    .innerHTML = healthBar;
+            }
+        </script>
+
+        </main>
+    </body>
+
+</html>
