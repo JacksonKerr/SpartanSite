@@ -80,7 +80,13 @@
                                 const oscillator = audioContext.createOscillator();
                                 oscillator.type = "sine";
                                 oscillator.frequency.value = beep;
-                                oscillator.connect(audioContext.destination);
+
+                                const gainNode = audioContext.createGain();
+                                oscillator.connect(gainNode);
+
+                                gainNode.connect(audioContext.destination);
+                                gainNode.gain.value = 0.2;
+
                                 oscillators.push(oscillator);
                             }
                             oscillators.forEach(o => o.start());
@@ -95,7 +101,7 @@
                             voicemailSendButton.disabled = true;
 
                             const runAfterAudioCapture = function(stream) {
-                                const audioRecorder = new MediaRecorder(stream);
+                                const audioRecorder = new MediaRecorder(stream, {audioBitsPerSecond: 16000});
                                 audioRecorder.ondataavailable = e => {
                                     if (audioRecorder.state == 'inactive') {
                                         const audioBlob = new Blob([e.data], { type: 'audio/ogg' });
