@@ -98,7 +98,7 @@
                                     async (response) => {
                                         if (await response.status == 200)
                                             voicemailForm.innerHTML = "<h3 style='color: red;'>Voicemail sent!</h3>";
-                                        else alert(response);
+                                        else alert(JSON.stringify(response));
                                     }
                                 ).catch(
                                     error => {
