@@ -85,7 +85,7 @@
                                 const object = Object.fromEntries(formData);
 
                                 fetch(
-                                    'https://api.web3forms.com/submit', 
+                                    'https://send-email-to-jacksonkerr2-970640149492.australia-southeast2.run.app', 
                                     {
                                         method: 'POST',
                                         headers: {
@@ -98,7 +98,7 @@
                                     async (response) => {
                                         if (await response.status == 200)
                                             voicemailForm.innerHTML = "<h3 style='color: red;'>Voicemail sent!</h3>";
-                                        else alert(JSON.stringify(response));
+                                        else alert(response.message);
                                     }
                                 ).catch(
                                     error => {
