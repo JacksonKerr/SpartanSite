@@ -168,8 +168,10 @@
                                     }
                                 );
                                 const submission = await response.json()
-                                if (submission.statusCode != null)
+                                if (submission.statusCode != null) {
                                     voicemailForm.innerHTML = "<h3 style='color: red;'>Error sending voicemail. Send me an email and I may fix the issue!</h3>";
+                                     console.error(submission.message);   
+                                }
                                 else voicemailForm.innerHTML = "<h3 style='color: green;'>Voicemail sent!</h3>";
                                 playFrequencies([350, 440], 200);
                             }
