@@ -18,4 +18,4 @@ jobs:
           forceUpload: true
           removeExtraFilesOnServer: true
           localDir: "public"
-          remoteDir: "/" 
+          remoteDir: "/public" 
