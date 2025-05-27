@@ -15,7 +15,6 @@ jobs:
           host: ${{ secrets.NFSN_HOSTNAME }}
           username: ${{ secrets.NFSN_USERNAME }}
           password: ${{ secrets.NFSN_PASSWORD }}
-          compress: true # Compression
           forceUpload: true
-          localDir: ".public"
-          remoteDir: "/" 
+          localDir: "/public"
+          remoteDir: "/public" 
