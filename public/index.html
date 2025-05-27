@@ -15,8 +15,11 @@
 
     <body style="font-family: 'minimono'; line-height: 14pt; background-color: #aaaaaa">
         <main style="padding: 20px; margin: auto; max-width: 750px; background-color: white">
-            <h1
-                style="width: 115px; height: 115px; margin: auto; padding: 5px; border: solid #ff7700 5px; line-height: 31pt;">
+            <style>
+                #mainHeadingText { transition: 0.8s; transform: rotate(0deg); }
+                #mainHeadingText:hover { transition: 0.8s; transform: rotate(720deg); }
+            </style>
+            <h1 id="mainHeadingText" style="width: 115px; height: 115px; margin: auto; padding: 5px; border: solid #ff7700 5px; line-height: 31pt;">
                 Jackson Kerr's Site
             </h1>
             <h3 style="text-align: center;">A Spartan web project</h3>
@@ -637,7 +640,7 @@
             </div>
 
             <div style="text-align: center; line-height: 20pt;">
-                <h2 id="footerQuote" style="padding: 5px; border: solid #ff7700 5px;">
+                <h2 id="footerQuoteH2Element" style="padding: 5px; border: solid #ff7700 5px;">
                     A wise man is he who disables Javascript
                 </h2>
                 <script>
@@ -656,9 +659,14 @@
                         "Can I pay less in rent if I spend most of the time living in my own head?",
                         "Best viewed with low expectations!"
                     ];
-                    document.getElementById('footerQuote').innerHTML = quotes[Math.floor(Math.random() * quotes.length)];
+                    document.getElementById('footerQuoteH2Element').innerHTML = quotes[Math.floor(Math.random() * quotes.length)];
                 </script>
                 <h3 style="margin-bottom: 0;">JacksonKerr2@gmail.com</h3>
+                <div style="text-align: center;">
+                    <a href="https://jacksonkerr.github.io">github-pages</a>
+                    <a href="https://jacksonkerr.neocities.org">neocities</a>
+                    <a href="https://jacksonkerr.nfshost.com/">nearly-free-speech</a>
+                </div>
             </div>
         </main> 
     </body>
