@@ -16,5 +16,6 @@ jobs:
           username: ${{ secrets.NFSN_USERNAME }}
           password: ${{ secrets.NFSN_PASSWORD }}
           forceUpload: true
+          removeExtraFilesOnServer: true
           localDir: "public"
           remoteDir: "/" 
