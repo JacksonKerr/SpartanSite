@@ -1,0 +1,11 @@
+- name: Checkout
+  uses: actions/checkout@v4
+- name: SFTP upload
+  uses: Dylan700/sftp-upload-action@latest
+  with:
+    server: ssh.nyc1.nearlyfreespeech.net
+    username: jacksonkerr2_jacksonkerr
+    password: ${{secrets.NFSN_PASSWORD}} 
+    port: 22
+    uploads: |
+    ./public => /
