@@ -17,4 +17,4 @@ jobs:
           password: ${{ secrets.NFSN_PASSWORD }}
           forceUpload: true
           localDir: "/public"
-          remoteDir: "/public" 
+          remoteDir: "/" 
