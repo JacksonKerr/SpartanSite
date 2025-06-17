@@ -10,6 +10,10 @@
         td { border: 1px solid black; padding: 5px }
         h2, h3 { text-align: center; }
         summary span { text-decoration: underline; cursor: pointer; }
+        summary:hover {
+            animation: rotateShake 0.2s infinite;
+            transform-origin: 25%;
+        }
         body {
             color: #222222;
             background-color: #222222;
@@ -21,6 +25,14 @@
             margin: auto; 
             max-width: 750px; 
         } 
+        @keyframes rotateShake {
+            50% {
+                transform: rotate(-1deg);
+            }
+            100% {
+                transform: rotate(1deg);
+            }
+        }
     </style>
     </head>
 
