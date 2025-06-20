@@ -6,66 +6,120 @@
             href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>🐙</text></svg>">
         <title>Jackson Kerr's Site</title>
         <style>
-        table { width: 100% }
-        td { border: 1px solid black; padding: 5px }
-        h2, h3 { text-align: center; }
-        summary span { text-decoration: underline; cursor: pointer; }
-        summary:hover {
-            animation: rotateShake 0.2s infinite;
-            transform-origin: 25%;
-        }
-        body {
-            color: #222222;
-            background-color: #222222;
-            line-height: 14pt;
-        }
-        main {
-            background-color: #EEEEEE;
-            padding: 20px;
-            margin: auto; 
-            max-width: 750px; 
-        } 
-        @keyframes rotateShake {
-            50% {
-                transform: rotate(-1deg);
+            * { font-family: 'minimono';  }
+            @font-face { /* 2025-05-05 */
+                font-family: 'minimono';
+                src: url(data:font/truetype;charset=utf-8;base64,d09GMgABAAAAAA3sAAoAAAAAOYgAAA2gAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAhAQK0VDFWAuDFAABNgIkA4MQBCAFk2gHIBtNMSMRwsYBBCjbjeIvE7g5onXQTlCqHCQKFqr2oh4y+zV+heY+WpN3cBUO8d4ISWZ/X5e+D4a7+2GHfZJzsaoAMaxVx3ZZgKdWO+CUiej4dd+nQpz8oeQDGJcPs3orpHI1H/z3v7QsBzkkMWe1M9NfnG6xZU0dNYDoixn5FSArc697Dk+AqAqgBWg1gKwEkJrnv+7Z2b3v7Q/ieMcjC4MMcouoL42nslIl4JaFIWnf37EnpRBUi2D1L52frdY+QNrjcNEwV6mSpvperby383atA8OcZEcH5PMx7FqS5wvCgBVBhUV7qbFM12bSlim6OrrJ2CUFSGiJN3nuy5r/gK3+QzeZD2qtJcZYYskgHruPDwE459zCoQUUwONcIdnChnFswqZHRn6xCc+vj9IZ2Hrux8NPwJ14UBB6+vIEeXA/AEABAIABEAASAgF0BeraDEQiDGBi2yr6pycAyrZRZPw38fTje9I3QVn2ryt6lkFddOi9cdLF9NbT7J41RRzgcp8Eh0ACV5ijIxYkhI01m0/ZEXdEQTzZLKtqIGEA5lM0T5auIWu1cUziGkFWUgRV8R4Y5SkNkiRVzvoa2fhJYS5FPUwKo7TlQTaP+rAQvEfG5LiRxLQJjD3Lazipssok1UmeI6ulejmVLf3EIA6hTFJm+F1vKDo5SWF2IjXQANEgS+rc92ETxmQvNW+n+lE/J55Snncy2mq0hY9bjayI72NUpfpmOIWDRXOPCtIxnzTsdae6C91hXYzw6c5xTDiJBqSBjdZVGBSNndQJFEC1WiW8glNYewtA8Tw7/17oL1h57GBwmUtDyMcVd+pCEn+TbFRj7O5gEBYqzRkMYblQ2Ymf6NmJl7zbHpjMZ+1G4mVDmgo2khxR7LXgMdN1W0cO5xToP0WIXPNzg5xlXmMmR3QHIpMveNyPN95jWUz6YmlC4qI2J0mgY3IoQwhE/woqXKbngSe5ReDNkGI+2cC4jiXmQYz5wi0QyMQhhTYsXisBzw5s68Qofkowex5YQGJgxZdPr3CNepEN+EmPjiseaSy2hL/0HVTnqoLsDCgnfjnsekAmdmKjfY6VwaXeXlmdXPu3eIqveb/0H5u6Go3BgcSlJqH9p8pl94o2hGSqSBqs6pADUbehJJ7kUPmNGO4V428Z3Xa2oaRUnzc8Wi731ys9PTt7LkKGLlLmw7j9qnAmas95S5sU2fvFZXKolnMpUbiO0QPCOkp1UGOCqNADz1zLs6sEgzjDVLi+tEQ1k1QevXF5YleLVvHV9NA2nTTL68/sDou1qOW8J2Paj5mzu6XOKbsoNoAhp1e2OrLVaJSPcIh+7A3ISbFRzVkZjagyBOugurShC8Fu5qSL5soiwzwhovFAzZ9HEGhNcnL2YClTjUQZXm9C65cvwiXnE2hlZB5un8H2sa567Usd177lsRXM/nhFtQ3IwXtRBCxedq1jBd+HHpRVagRUAjvbTTjrGo8yIHsnSnYHC9u5DoSWYovggElN/oKmOEYtomAx00eDJUQuVf5MZfVlK03aGwcbnZ9SSUbOSzbAz0peOJ50LH+huMe57ZRZZx0igMmjUAML49WCd6M3gdOxsUaJGGBFJL+Kw9iR8jkSEsWIBE3wTb3rgpAS0TTwojc36zHDEWjHf4xdYoiTgTQPIp4qqS5GfX0jTkf3uJLTOTQE6S/nqJFKUTBJDfXPlSwhTVSwRQhh1O/sNIuZUmPu9pyUffTvYMA2OcJkJqy5B4zeumHdkaVuYkhvboIVHdczBRwNdx6lDtDNyobjZDk6gRo/MCqWxZn6PORrGe7fj/mlsFR/PXR82K0t/xXuXPDXheafRFbmViX7+Hm24gtns9W2qnKbWT6zs6a5aP0lc9/U/l9DAdBz1aPuh3TeeTUqEASVBdEhHBCFcBEqiXBEVYE6yN3vRQMCyV7/g5/WCXi21oEZ/GIHisPPixSiyHJghn7+0rKrWM+Fo4q5IseRRx9cCOQNQB60nb054EF5zwZLn8T3czjiTvJzycHlAe//t0cAjSIQwYWAoAGEXzwAiAj5LZKcqWOfv2S/YQPBmvZduroRWRfXPC0n7ZJ24PRFAPcMBHW5jO57xbaHwCNAIVBAVIAEEQEhJ6z3Xhfe3G4PAFLW2nrtq3MkGYunFWT8ZWAs34KgXBQFZA1ozifw5g6jtgRAsB+vbgi3b+sIs+xWTAsp4K0cKFu0nmYXYu75nbPaDKu74sxEueIZLbkpHtdpLaBL5spwGsmjwm1F84Z7Yt4U7683y3bLxMq7N23Tc6H5D8HOlGok/qoG+AAbGPNhdyYguEOxD1SrDce6iGQre1kZC9w5m9ImG6j92w5Rx9zfnXiBKim0DudfT4zRnizHc8rVIJzQTF7VX27GhvViVldKjpXoApu9PShbpr/gHYBU1fJkPc+RNsh3PltZ15JVXMbxtnpXWda+Hv+9y32aSW4PCLuslK0pkSBrdcnwDD3s1xeF5OUh1O0c5w4e+SJm0xf0wk+RawAYcIArgO9gBmbcaeDMgO78/J0D996Lrf00bilehtz9OHbcJEaAZA3VNEwioHDX4f58l/y2Xe7vRrY4HfFTltp+jxDt8kjxSwSvKmiow2GxaPVKlfKdf3VQxyexi8PBFqfNEMntcw/2+XDe1e78kLXn0kTn9nNWP6+ontMwVUK1nVn26Lk3yqouXxlNncm/x9wLNltX0z1XlTUxjBMYBK84S/PEpvGaLVoLyDzXFjfXXqaFetFlXrSJIikvavtTB8jahq6za9vDp9Uu4rMDz12XaJd1XUT9JqJfh7eB82SrQzgIX/9z+AF3cZFqw/DYfxPyoLjUhSLAaZNdEIhH2a82SaJIDbLSLu/Xwi4No96XLXS5MGJht0XrNINs0fZZkEZunFhBmVInFUbbjrtsdC8dfTv5TNFpdcdMS58lMZRWohFm8jtQchfGpoBZolV5zcuoilLfNhKOu0OU5wDhTNtKWWDDHXjEBWl9bHbIaNaAuk0cAg5N3Cn3buSIsjPe4TotbXEaeqFcxmIpMnKL6vVJcagz2NFbpWXuYpeDLU62KT8TAAFgJmn/cCLAsPX2aV//CiwkD9oAWmv48ByX+0qSvxhO1FgChj0Q0lSiiHCC7dB3J7nEfadOV1FQp+2zQ2bXpANq1ElQzKFUcCiC9jC/dYWlnOik9Hq1Z7nQZyv0RsF1LFbyAtzUNKnUqVeKg5bfgpDcXaL16lP79Ty6l5mbA1vPQC0rnyEKv3QsOga9q3pTDat4gcH6VLW7zrx2caeVtl7hLX3RawBd+f6LIWu4rbyK/mXPk+t6ODrsMVPrUn04mFu507fMNBsTKILEKYrNstvVDA6bBdXDOW+o01HZOXLakj7dJ5DgjNentmekmpZPP20V1xY9HrY11qsK6LFQCa8HkY50XmWmISiQVgNUGJfZsUT9daxP4oGatY3EJxvyTASFgnONhbB+iTZnKhk2dpgWqWPjBTKx51uZV+CjOnBVtghmaj0zJbmgjrCaSKiTflap6A5l4ZUojWZiDCx7b8jBHRnG611wgfXVA9jUfoZwhtlpNmkbosS8Czr/zNXUWag+IDgwu5y0PhDkQtFyIx0xVyrOdS+RCgPu7kdBbA2EtebZNUzkLJVVERV6DfrTqKEorQH7+lcBhLKaffx8AV6xoTqtYWEltnxXNfO3zyLOeRsZ2XwqrA39/Uscfp6N0jDsAogAAH5H2FZUXvHhXC/6BAARDqOPm1qDfgCg5eQCoUfMEPds8p/pwuauyI6mjeUls+XQKq3JK2wO/IdmcVkYdgnRPVi3tJ6ExjjNmRUyTePrpOoXgk2x10yAUi8/HsJsKzFjUQYTTAamZCWYY2UA85g1LCjwh0VuzrCG1bDDWgnDC+v0jAHMjIz/2EjMrFltIWc+786ezbwUY80uxjlG+DhhTIgHJy3yp1Fg44QCwrokQxnzyYMydk0JlLFV5iGsyymEDXkB4eC8B4TDCwHCDhUBCDtXJZS3ZbWEQKVJQqn2Co6k43uMGdc3RDr+xJRcZ5hj1VrMY61gQUG7YZFbz3DNqONLrJXQr7FOz9JiZmSN5aS4LjOSFY+gjGRf4bEiluDK+BDDhUALhcYUEBwmwmcd+PCyKf2lu/fC42rPchBMxKLw3fo4TvGGH2A3gDj3D7x58AqDBHc99Cm83YhGb/tmAVANXHMVuoMNy83mzjtREM7n0RHsKHOc0hXY8ZQNAYcU+HNxvi1T3W7rQTFIocZr0ECW0MExpeGUzrEOmSA+lD8e4M17cUJiwUcAP96zPLBctx1yIN1zGW6bHry/tr9APoKc+8KftyDphAyXOxOLC3bAm2uQwgLSIA2J0yVuIgHCNJHqStAtMiROYucj4ri4nM2U1FoIU2uXpSqb1gndOf+KjXS6G1uNfr07Cn+MMnkcOASvkz/b91/ah3zxvVK8fp9VWkdnpeKwnmZV9fbwmk9eBhI+X4/+/CF8KF3zFVXIq6Upi5CHc2vfSos3dJ0DdU3Ef8OVr8qHY1caC9CQWjsDswx+fYhlC58AP+/X7EDPx/JfvHi9fFn4J/ftH+gT5O3rSU6N9DoZwpk9V8h6mgd5cvpZNci+zJf5fKH/A9kIcXnmB9AirBDaMxhUUqgh+vn5Jl2/2Tb+vh/DlamKmJ7eZ2gA);
             }
-            100% {
-                transform: rotate(1deg);
+            table { width: 100% }
+            td { border: 1px solid black; padding: 5px }
+            h2, h3, nav { text-align: center; }
+            h2 {
+                animation: rotateShake 5s infinite;
             }
-        }
-    </style>
+            summary span { text-decoration: underline; cursor: pointer; }
+            details:not([open]) summary:hover {
+                animation: shake 0.2s infinite;
+            }
+            details[open]  {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            body {
+                color: #222222;
+                background-color: #222222;
+                line-height: 14pt;
+            }
+            main {
+                background-color: #EEEEEE;
+                padding: 20px;
+                margin: auto; 
+                max-width: 750px;
+            } 
+            @keyframes shake {
+                0% {   transform: translate(1px, 1px) rotate(0deg); }
+                10% {  transform: translate(-1px, -2px) rotate(-1deg); }
+                20% {  transform: translate(-3px, 0px) rotate(1deg); }
+                30% {  transform: translate(3px, 2px) rotate(0deg); }
+                40% {  transform: translate(1px, -1px) rotate(1deg); }
+                50% {  transform: translate(-1px, 2px) rotate(-1deg); }
+                60% {  transform: translate(-3px, 1px) rotate(0deg); }
+                70% {  transform: translate(3px, 1px) rotate(-1deg); }
+                80% {  transform: translate(-1px, -1px) rotate(1deg); }
+                90% {  transform: translate(1px, 2px) rotate(0deg); }
+                100% { transform: translate(1px, -2px) rotate(-1deg); }
+            }
+            @keyframes rotateShake {
+                0% {   transform: rotate(5deg); }
+                50% {  transform: rotate(-5deg); }
+                100% { transform: rotate(5deg); }
+            }
+        </style>
     </head>
 
     <body>
-        <main>
-            <style>
-                #mainHeadingText { 
-                    transition: 0.8s; transform: rotate(0deg); 
-                    width: 115px; 
-                    height: 115px; 
-                    margin: auto; 
-                    padding: 5px; 
-                    border: solid #ff7700 5px; 
-                    line-height: 31pt;
-                }
-                #mainHeadingText:hover { 
-                    transition: 0.8s; transform: rotate(720deg); 
-                }
-            </style>
-            <h1 id="mainHeadingText">Jackson Kerr's Site</h1>
-            <h3>A Spartan web project</h3>
+        <main id="mainPage" style="min-height: 100%;">
+            <header>
+                <style>
+                    #mainHeadingText { 
+                        transition: 0.8s; transform: rotate(0deg); 
+                        width: 115px; 
+                        height: 115px; 
+                        margin: auto; 
+                        padding: 5px; 
+                        border: solid #ff7700 5px; 
+                        line-height: 31pt;
+                    }
+                    #mainHeadingText:hover { 
+                        transition: 0.8s; transform: rotate(720deg); 
+                    }
+                </style>
 
-            <!-- I think it's a bit early for a navbar lol -->
-            <!--
+                <h1 id="mainHeadingText">Jackson Kerr's Site</h1>
+                <h3>Welcome to my dusty corner of the internet!</h3>
+                
+                
                 <nav>
-                    <h3>
-                        <a href="#musings">Musings</a>
-                        /
-                        <a href="#links">Links</a>
-                    </h3>
-                </h3>
-            -->
-            
+                    <style>
+                        section{ 
+                            display: none;
+                            position: relative;
+                            padding-top: 250px;
+                            top: -240px;
+                        }
+                        section:target { display: block; }
+
+                        section {
+                            z-index: 900;
+                        }
+
+                        header {
+                            position: relative;
+                            z-index: 950;
+                        }
+                    </style>
+
+                    <a onclick="myFunction()" href="#home">home</a>
+                    <a onclick="myFunction()" href="#musings">musings</a>
+                    <a onclick="myFunction()" href="#links-i-like">links-i-like</a>
+
+                    <script>
+                        function myFunction() {
+                            setTimeout(() => {
+                                document.documentElement.scrollTop = 0;
+                            }, "0.1");
+                            
+                        }
+                    </script>
+                </nav>
+            </header>
+           
+            <section id="home">
+                <hr>
+                <h2>Home content test:</h2>
+                <hr>
+            </section>
+
             <section id="musings">
                 <hr>
                 <h2>Musings:</h2>
@@ -421,7 +475,7 @@
                 </details>
             </section>
 
-            <section id="links">
+            <section id="links-i-like">
                 <hr>
                 <h2>Links I Like:</h2>
                 <hr>
@@ -531,27 +585,56 @@
                         "Can I pay less in rent if I spend most of the time living in my own head?",
                         "Best viewed with low expectations!"
                     ];
-                    document.getElementById('footerQuoteH2Element').innerHTML = quotes[Math.floor(Math.random() * quotes.length)];
+                    const randomlySelectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                    document.getElementById('footerQuoteH2Element').innerHTML = randomlySelectedQuote;
                 </script>
                 <h3 style="margin-bottom: 0;">JacksonKerr2@gmail.com</h3>
                 <a href="https://jacksonkerr.github.io">github-pages</a>
                 <a href="https://jacksonkerr.neocities.org">neocities</a>
                 <a href="https://jacksonkerr.nfshost.com/">nearly-free-speech</a>
-                <!-- Default gnrcounter.com code for jacksonkerr.neocities.org -->
-                <script language="JavaScript" type="text/javascript" src="https://gnrcounter.com/counter.php?accId=d909239d82b24272f5ba0e416deb6b8b"></script>
-                <noscript>
-                    <a href="https://gnrcounter.com" title="Web Analytics">Web Analytics</a>
-                </noscript>
-                <!-- End of gnrcounter.com Code -->  
             </footer>
         </main> 
-    </body>
-</html>
 
-<style>
-    * { font-family: 'minimono';  }
-    @font-face { /* 2025-05-05 */
-        font-family: 'minimono';
-        src: url(data:font/truetype;charset=utf-8;base64,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);
-    }
-</style>
+        <!-- TODO: Make landing page! -->
+        <!-- <main id="landingPage" style="display: none;">
+            <h1 id="mainHeadingText">Jackson Kerr's Site</h1>
+            <div style="text-align: center">
+                <h3>Welcome to my dusty corner of the internet!</h3>
+                <button id="enterSiteButton">Leshgo!</button>
+            </div>
+            <script>
+                const showLandingPage = function () {
+                    const landingPage = document.getElementById("landingPage");
+                    landingPage.style.display = "";
+                    mainPage.style.display = "none";
+                };
+                const showMainPage = function () {
+                    landingPage.style.display = "none";
+                    mainPage.style.display = "";
+                };
+
+                showLandingPage();
+                const dialogue3Div = document.getElementById("dialogue3Div");
+                document.getElementById("enterSiteButton").addEventListener(
+                    'click', 
+                    showMainPage
+                );
+            </script>
+        </main> -->
+    </body>
+    
+    <script>
+        const detailsElements = document
+            .querySelectorAll('details');
+        detailsElements.forEach(
+            function(d) {
+                d.setAttribute("name", "tempref"); 
+                const buttonFunction = "this.parentElement.removeAttribute('open'); document.documentElement.scrollTop = 0;"
+                const closeButton = "<button onclick=\""+ buttonFunction+"\">"
+                     + "Collapse section</button>";
+                d.innerHTML += closeButton;
+            }
+        );
+    </script>
+
+</html>
