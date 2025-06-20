@@ -88,9 +88,15 @@
                                 padding-top: 250px;
                             }
                             section:target { display: block; }`;
-                        document.head.appendChild(styleSheet);
-                        if (!window.location.toString().includes("#"))
-                            document.getElementById("homeLink").click();
+
+                        window.addEventListener(
+                            "load", 
+                            function() {
+                                document.head.appendChild(styleSheet);
+                                if (!window.location.toString().includes("#"))
+                                    document.getElementById("homeLink").click();
+                            }.bind(this),
+                        );
                     </script>
                 </nav>
             </header>
