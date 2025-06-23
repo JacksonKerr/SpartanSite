@@ -99,6 +99,15 @@
                     <a href="#musings">Musings</a> /
                     <a href="#links-i-like">Links I Like</a> /
                     <a href="#about">About</a>
+                    <script>
+                        window.addEventListener(
+                            "load", 
+                            function() {
+                                if (!window.location.toString().includes("#"))
+                                    document.getElementById("homeLink").click();
+                            }.bind(this),
+                        );
+                    </script>
                 </nav>
             </header>
            
