@@ -50,6 +50,18 @@
             details[open]  { margin-bottom: 20px; }
             summary { margin-bottom: 5px }
             summary span { text-decoration: underline; cursor: pointer; }
+
+            section { 
+                display: none;
+                margin-top: -240px;
+                padding-top: 250px;
+                
+                transition: 0.35s;
+                @starting-style {
+                    opacity: 0;
+                }
+            }
+            section:target { display: block; }
         </style>
     </head>
 
