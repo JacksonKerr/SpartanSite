@@ -122,7 +122,7 @@
                 <h2>Musings:</h2>
                 <hr>
 
-                <details>
+                <details name="preventOpeningMultipleAtTheSameTime">
                     <summary>
                         <span>2025/06/16 - A day at the market</span>
                     </summary>
@@ -140,7 +140,7 @@
                     </p>
                 </details>
 
-                <details>
+                <details name="preventOpeningMultipleAtTheSameTime">
                     <summary>
                         <span>2025/05/31 - A serious case of G.A.S</span>
                     </summary>
@@ -178,7 +178,7 @@
                         I'm proud to say that I'm starting to kick this habit. But, I'm a little ashamed that it's taken me this long.
                     </p>
                     <p>
-                        Last month I again tried something new. I built a table. It was the first piece of non-kitset furniture I’d ever made. To my surprise (and the relief of the missus) I ended up with a relatively presentable, if a bit rustic final result. Armed with a friends garage, borrowed drill, tin of wood stain, and the cheapest kiln-dried timber that money can buy<a href="#gasFootnote1">[1]</a>. I got it done, and I bet if I did it again with the same tools, it wouldn't even take me an entire week of spare time.
+                        Last month I again tried something new. I built a table. It was the first piece of non-kitset furniture I’d ever made. To my surprise (and the relief of the missus) I ended up with a relatively presentable, if a bit rustic final result. Armed with a friends garage, borrowed drill, tin of wood stain, and the cheapest kiln-dried timber that money can buy[1]. I got it done, and I bet if I did it again with the same tools, it wouldn't even take me an entire week of spare time.
 
                         My point is. Just do the stuff you want do do. You don't need to be good at something to enjoy it, and watch out for gear heads trying to distract you from improving.
                     </p>
@@ -186,12 +186,12 @@
                         Not sure how to end this one so I'm signing out with a bababoey.
                     </p>
                     <p>Bai</p>
-                    <p id="gasFootnote1">
+                    <p>
                         [1] Ok! So I did buy an orbital sander... But it's definately different because I didn't know anyone who owns one and I would have been afraid of breaking it if I did ok!?
                     </p>
                 </details>
 
-                <details>
+                <details name="preventOpeningMultipleAtTheSameTime">
                     <summary>
                         <span>2025/05/03 - Please leave a message after the beep</span>
                     </summary>
@@ -337,7 +337,7 @@
                     </script>
                 </details>
 
-                <details>
+                <details name="preventOpeningMultipleAtTheSameTime">
                     <style>
                         @font-face {
                             font-family: 'prototypeMinimono2025-02-16';
@@ -390,7 +390,7 @@
                     <p>Update: Added the new font to this page on 2025-05-05 :)</p>
                 </details>
 
-                <details>
+                <details name="preventOpeningMultipleAtTheSameTime">
                     <summary>
                         <span>2025/02/10 - Dumbphone for a Dumb bro</span>
                     </summary>
@@ -432,7 +432,7 @@
                     </p>
                 </details>
 
-                <details>
+                <details name="preventOpeningMultipleAtTheSameTime">
                     <summary>
                         <span>2025/02/01 - What I've been up to</span>
                     </summary>
@@ -444,7 +444,7 @@
                     </p>
                 </details>
 
-                <details>
+                <details name="preventOpeningMultipleAtTheSameTime">
                     <summary>
                         <span>2025/01/23 - Evan Monsma and this site</span>
                     </summary>
@@ -462,7 +462,7 @@
                     </p>
                 </details>
 
-                <details>
+                <details name="preventOpeningMultipleAtTheSameTime">
                     <summary>
                         <span>2025/01/22 - Welcome</span>
                     </summary>
@@ -607,19 +607,4 @@
             </footer>
         </main> 
     </body>
-    
-    <script>
-        // todo: It would be nice not to have this script tag.
-        const detailsElements = document
-            .querySelectorAll('details');
-        detailsElements.forEach(
-            function(d) {
-                d.setAttribute("name", "detailsElementNameAttr"); 
-                const buttonFunction = "this.parentElement.removeAttribute('open');"
-                d.innerHTML += "<button onclick=\""+ buttonFunction+"\">"
-                     + "Collapse</button>";
-            }
-        );
-    </script>
-
 </html>
