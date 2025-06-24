@@ -6,6 +6,15 @@
             href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>🐙</text></svg>">
         <title>Jackson Kerr's Site</title>
         <style>
+            /* Declare these explicitly otherwise they differ per browser */
+            h1 { font-size: 34px; }
+            h2 { font-size: 28px; }
+            h3 { font-size: 20px; }
+            h4 { font-size: 18px; }
+            h5 { font-size: 16px; }
+            h6 { font-size: 12px; }
+            
+
             * { font-family: 'minimono';  }
             @font-face { /* 2025-06-20 */
                 font-family: 'minimono';
@@ -62,13 +71,14 @@
                 }
             }
             section:target { display: block; }
+            nav { font-size: 25px; }
             h2, h3, nav { text-align: center; }
             h2 { animation: rotateShake 5s infinite linear; }
             table { width: 100% }
             td { border: 1px solid black; padding: 5px }
             details:not([open]) summary:hover { animation: agressiveShake 0.2s infinite; }
             details[open]  { margin-bottom: 20px; }
-            summary { margin-bottom: 5px }
+            summary { margin-bottom: 18px }
             summary span { text-decoration: underline; cursor: pointer; }
         </style>
     </head>
@@ -118,6 +128,26 @@
                     <p>Welcome to my little corner of the internet!</p>
                     <p>Feel free to have a look around.</p>
                 </span>
+
+                <style>
+                    @keyframes horizontalShake {
+                            0% { transform: translate(0px, 0px)}
+                            25% { transform: translate(1px, 0px)}
+                            50% { transform: translate(1px, 1px)}
+                            75% { transform: translate(-1px, -1px)}
+                            100% { transform: translate(0px, 0px) }
+                        }
+                    #error {
+                        background-color: #c5c9c4; 
+                        box-shadow: 1px 1px 1px 1px black;
+                        padding: 3px; 
+                        border-left: solid 2px #d3d3d3;
+                        border-top: solid 2px #d3d3d3;
+                        animation: horizontalShake 0.2s infinite linear;
+                        transition: 1s;
+                        overflow: hidden;
+                    }
+                </style>   
                 <div id="error"><!-- TODO: Clean up the styling in here -->
                     <style>
                         #errorHeader {
@@ -218,8 +248,11 @@
                             <div class="redDotCrossElement" style="rotate: -45deg"></div>
                         </span>
                         <span>
-                            This site is not for mobile devices! 
-                            It will work, I just don't like them.
+                            <b>
+                                Warning: This site was not created for mobile devices!
+                                <br />
+                                It will work fine, I just don't like them.
+                            </b>
                         </span>
                     </div>
                     <div>
@@ -260,28 +293,6 @@
                     </div>
                 </div>   
             </section>
-
-            <div>
-                <style>
-                    @keyframes horizontalShake {
-                            0% { transform: translate(0px, 0px)}
-                            25% { transform: translate(1px, 0px)}
-                            50% { transform: translate(1px, 1px)}
-                            75% { transform: translate(-1px, -1px)}
-                            100% { transform: translate(0px, 0px) }
-                        }
-                    #error {
-                        background-color: #c5c9c4; 
-                        box-shadow: 1px 1px 1px 1px black;
-                        padding: 3px; 
-                        border-left: solid 2px #d3d3d3;
-                        border-top: solid 2px #d3d3d3;
-                        animation: horizontalShake 0.2s infinite linear;
-                        transition: 1s;
-                        overflow: hidden;
-                    }
-                </style>   
-            </div>
 
             <section id="musings">
                 <hr>
@@ -512,17 +523,13 @@
                     </style>
                     <p>
                         <form id="voicemailForm" style="display: flex; align-items: center;">
-                            <fieldset style="width: 250px; margin: auto;">
-                                <legend style="margin: auto;">Leave me a voicemail!</legend>
-
                                 <input type="text" name="voiceMemoInput"
                                     id="voiceMemoInput" required style="display: none;" />
 
                                 <button id='voicemailButton' type="button"
-                                        style="width: 100%">
-                                    <h2>Record Voicemail</h2>
+                                        style="width: 100%;">
+                                    <h3>Record Voicemail</h3>
                                 </button>
-                            </fieldset>
                         </form>
                     </p>
                     <script>
