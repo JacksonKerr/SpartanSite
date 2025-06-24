@@ -25,9 +25,9 @@
                 100% { transform: translate(1px, -2px) rotate(-1deg); }
             }
             @keyframes rotateShake {
-                0% {   transform: rotate(5deg); }
-                50% {  transform: rotate(-5deg); }
-                100% { transform: rotate(5deg); }
+                0% {   transform: rotate(4deg); }
+                50% {  transform: rotate(-4deg); }
+                100% { transform: rotate(4deg); }
             }
 
             body {
@@ -97,6 +97,7 @@
                 <nav>
                     <a href="#home" id="homeLink">Home</a> /
                     <a href="#musings">Musings</a> /
+                    <a href="#voicemail">Voicemail</a> /
                     <a href="#links-i-like">Links I Like</a> /
                     <a href="#about">About</a>
                     <script>
@@ -189,152 +190,6 @@
                     <p>
                         [1] Ok! So I did buy an orbital sander... But it's definately different because I didn't know anyone who owns one and I would have been afraid of breaking it if I did ok!?
                     </p>
-                </details>
-
-                <details name="preventOpeningMultipleAtTheSameTime">
-                    <summary>
-                        <span>2025/05/03 - Please leave a message after the beep</span>
-                    </summary>
-                    <p>
-                        Hi, you have reached Jackson's phone. Unfortunately, I'm not available at the moment so please leave a message after the beep.
-                    </p>
-                    <p>
-                        Click the button to record your 15 second message. After being recorded, your message will be played back. You can then choose to re-record or send the message.
-                    </p>
-                    <p>
-                        <b>Note: If you're on a phone this will only work with chrome.</b>
-                    </p>
-                    <p>
-                        <form id="voicemailForm">
-                            <fieldset>
-                                <legend>Leave me a voicemail!</legend>
-
-                                <input type="text" name="voiceMemoInput"
-                                    id="voiceMemoInput" required style="display: none;" />
-
-                                <span style="float: left;">
-                                    <label for="voiceMemoName">Memo name: </label>
-                                    <input type="text" name="voiceMemoName" id="voiceMemoName" />
-                                </span>
-                                <span style="float: right;">
-                                    <button id='voicemailStartButton' type="button">Record Message</button>
-                                    <button id="voicemailSendButton" type="submit" disabled>Send Message</button>
-                                </span>
-                            </fieldset>
-                        </form>
-                    </p>
-                    <script>
-                        const VOICEMAIL_LENGTH_SECONDS = 15;
-
-                        const voicemailStartButton = document.getElementById('voicemailStartButton');
-                        const voicemailSendButton = document.getElementById('voicemailSendButton');
-                        const voicemailForm = document.getElementById('voicemailForm');
-                    
-                        const playFrequencies = function(beepFrequencies, msBeepDuration, runAfter) {
-                            const audioContext = new AudioContext();
-                            const oscillators = [];
-                            for (beep of beepFrequencies) {
-                                const oscillator = audioContext.createOscillator();
-                                oscillator.type = "sine";
-                                oscillator.frequency.value = beep;
-
-                                const gainNode = audioContext.createGain();
-                                oscillator.connect(gainNode);
-
-                                gainNode.connect(audioContext.destination);
-                                gainNode.gain.value = 0.2;
-
-                                oscillators.push(oscillator);
-                            }
-                            oscillators.forEach(o => o.start());
-                            setTimeout(function () {
-                                oscillators.forEach(o => o.stop());
-                                if (runAfter) runAfter();
-                            }, msBeepDuration);
-                        };
-
-                        voicemailStartButton.onclick = e => {
-                            voicemailStartButton.disabled = true;
-                            voicemailSendButton.disabled = true;
-
-                            const runAfterAudioCapture = function(stream) {
-                                const audioRecorder = new MediaRecorder(stream, {audioBitsPerSecond: 16000});
-                                audioRecorder.ondataavailable = e => {
-                                    if (audioRecorder.state == 'inactive') {
-                                        const audioBlob = new Blob([e.data], { type: 'audio/ogg' });
-
-                                        const audioElement = document.createElement('audio');
-                                        audioElement.controls = true;
-                                        audioElement.src = URL.createObjectURL(audioBlob);
-
-                                        var voicemailPlayback = new Audio(audioElement.src);
-                                        voicemailPlayback.load();
-                                        voicemailPlayback.currentTime = 0;
-                                        voicemailPlayback.play();
-                                        voicemailPlayback.addEventListener(
-                                            'ended', 
-                                            function() {
-                                                voicemailSendButton.disabled = false;
-                                            }
-                                        );
-
-                                        var reader = new window.FileReader();
-                                        reader.readAsDataURL(audioBlob); 
-                                        reader.onloadend = function() {
-                                            base64 = reader.result;
-                                            base64 = base64.split(',')[1];
-                                            voiceMemoInput.value = base64;
-                                        }
-                                    }
-                                };
-
-                                playFrequencies([350, 440], 400);
-                                audioRecorder.start();
-                                setTimeout(() => {
-                                    playFrequencies([350, 440], 400);
-                                    audioRecorder.stop();
-                                    voicemailStartButton.disabled = false;
-                                }, VOICEMAIL_LENGTH_SECONDS * 1000);
-                            };
-
-                            navigator.mediaDevices.getUserMedia({ audio: true }).then(runAfterAudioCapture)
-                        }
-
-                        voicemailForm.addEventListener(
-                            'submit',
-                            async function(e) { 
-                                e.preventDefault();
-                                const object = Object.fromEntries(new FormData(voicemailForm));
-                                
-                                voicemailForm.innerHTML = "<h3 style='color: orange;'>Sending Voicemail...</h3>";
-                                
-                                const response = await fetch(
-                                    "https://api.submitjson.com/v1/submit/CsG9uF6sG", 
-                                    {
-                                        method: 'POST',
-                                        headers: {
-                                            'content-type': 'application/json',
-                                            'X-API-Key': 'sjk_67294f9fb61a4771a361821d758ed83d',
-                                        },
-                                        body: JSON.stringify({
-                                            data: {
-                                                email: 'jacksonkerr2@gmail.com',
-                                                voiceMemoName: object.voiceMemoName,
-                                                voicemailBase64: object.voiceMemoInput,
-                                            }
-                                        })   
-                                    }
-                                );
-                                const submission = await response.json()
-                                if (submission.statusCode != null) {
-                                    voicemailForm.innerHTML = "<h3 style='color: red;'>Error sending voicemail. Send me an email and I may fix the issue!</h3>";
-                                    console.error(submission.message);   
-                                }
-                                else voicemailForm.innerHTML = "<h3 style='color: green;'>Voicemail sent!</h3>";
-                                playFrequencies([350, 440], 200);
-                            }
-                        );
-                    </script>
                 </details>
 
                 <details name="preventOpeningMultipleAtTheSameTime">
@@ -470,6 +325,144 @@
                         I was inspired to create this site by <a href="https://melonking.net/thoughts/manifesto">The Melonking Manifesto</a> but there's not much to see here yet... In the meantime, have a <a href="https://skysedge.com/work/index.html">cool link</a> to explore.
                     </p>
                 </details>
+            </section>
+
+            <section id="voicemail">
+                <hr>
+                <h2>Please leave a message after the beep!</h2>
+                <hr>
+                    <p>
+                        Hi, you have reached Jackson's phone. Unfortunately, I'm not available at the moment so please leave a message after the beep.
+                    </p>
+                    <p>
+                        Click the button to record your 15 second message. Your message will be played back to you before sending.
+                    </p>
+                    <p style="text-align: center;">
+                        <b>If you're on a phone this will only work with chrome!</b>
+                    </p>
+                    <!-- TODO: Fix the styling for this whole ass thing. Original date to include somewhere 2025/05/03 -->
+                    <style>
+                        button:not(:disabled) {
+                            color: green;
+                        }
+                    </style>
+                    <p>
+                        <form id="voicemailForm" style="display: flex; align-items: center;">
+                            <fieldset style="display: inline; margin: auto">
+                                <legend>Leave me a voicemail!</legend>
+
+                                <input type="text" name="voiceMemoInput"
+                                    id="voiceMemoInput" required style="display: none;" />
+
+                                <button id='voicemailButton' type="button"><h2>Record Voicemail</h2></button>
+                            </fieldset>
+                        </form>
+                    </p>
+                    <script>
+                        const VOICEMAIL_LENGTH_SECONDS = 15;
+
+                        const voicemailButton = document.getElementById('voicemailButton');
+                        
+                        const voicemailForm = document.getElementById('voicemailForm');
+                    
+                        const playFrequencies = function(beepFrequencies, msBeepDuration, runAfter) {
+                            const audioContext = new AudioContext();
+                            const oscillators = [];
+                            for (beep of beepFrequencies) {
+                                const oscillator = audioContext.createOscillator();
+                                oscillator.type = "sine";
+                                oscillator.frequency.value = beep;
+
+                                const gainNode = audioContext.createGain();
+                                oscillator.connect(gainNode);
+
+                                gainNode.connect(audioContext.destination);
+                                gainNode.gain.value = 0.2;
+
+                                oscillators.push(oscillator);
+                            }
+                            oscillators.forEach(o => o.start());
+                            setTimeout(function () {
+                                oscillators.forEach(o => o.stop());
+                                if (runAfter) runAfter();
+                            }, msBeepDuration);
+                        };
+
+                        voicemailButton.onclick = e => {
+                            voicemailButton.innerHTML = '<h2 style="color: orange;">Recording</h2>';
+                            voicemailButton.disabled = true;
+                            navigator.mediaDevices.getUserMedia({ audio: true })
+                                .then(
+                                    function(stream) {
+                                        const audioRecorder = new MediaRecorder(stream, {audioBitsPerSecond: 16000});
+                                        audioRecorder.ondataavailable = e => {
+                                            if (audioRecorder.state == 'inactive') {
+                                                const audioBlob = new Blob([e.data], { type: 'audio/ogg' });
+
+                                                const audioElement = document.createElement('audio');
+                                                audioElement.controls = true;
+                                                audioElement.src = URL.createObjectURL(audioBlob);
+
+                                                var voicemailPlayback = new Audio(audioElement.src);
+                                                voicemailPlayback.load();
+                                                voicemailPlayback.currentTime = 0;
+                                                voicemailPlayback.addEventListener(
+                                                    'ended',
+                                                    async function() {
+                                                        const object = Object.fromEntries(new FormData(voicemailForm));
+                                
+                                                        voicemailForm.innerHTML = "<h3 style='color: orange;'>Sending Voicemail...</h3>";
+                                                        
+                                                        const response = await fetch(
+                                                            "https://api.submitjson.com/v1/submit/CsG9uF6sG", 
+                                                            {
+                                                                method: 'POST',
+                                                                headers: {
+                                                                    'content-type': 'application/json',
+                                                                    'X-API-Key': 'sjk_67294f9fb61a4771a361821d758ed83d',
+                                                                },
+                                                                body: JSON.stringify({
+                                                                    data: {
+                                                                        email: 'jacksonkerr2@gmail.com',
+                                                                        voicemailBase64: object.voiceMemoInput,
+                                                                    }
+                                                                })   
+                                                            }
+                                                        );
+                                                        const submission = await response.json()
+                                                        if (submission.statusCode != null) {
+                                                            voicemailForm.innerHTML = "<h3 style='color: red;'>Error sending voicemail. Send me an email and I may fix the issue!</h3>";
+                                                            console.error(submission.message);   
+                                                        }
+                                                        else voicemailForm.innerHTML = "<h3 style='color: green;'>Voicemail sent!</h3>";
+                                                        playFrequencies([350, 440], 200);
+
+                                                    }
+                                                );
+                                                voicemailButton.innerHTML = '<h2 style="color: orange;">Playing Voicemail</h2>';
+                                                voicemailButton.disabled = true;
+                                                voicemailPlayback.play();
+
+                                                var reader = new window.FileReader();
+                                                reader.readAsDataURL(audioBlob); 
+                                                reader.onloadend = function() {
+                                                    base64 = reader.result;
+                                                    base64 = base64.split(',')[1];
+                                                    voiceMemoInput.value = base64;
+                                                }
+                                            }
+                                        };
+
+                                        playFrequencies([350, 440], 400);
+                                        audioRecorder.start();
+                                        setTimeout(() => {
+                                            playFrequencies([350, 440], 400);
+                                            audioRecorder.stop();
+                                        }, VOICEMAIL_LENGTH_SECONDS * 1000);
+                                    }.bind(this)
+                                );
+                        }
+                    </script>
             </section>
 
             <section id="links-i-like">
