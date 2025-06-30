@@ -107,7 +107,7 @@
                 <nav>
                     <a href="#home" id="homeLink">Home</a> /
                     <a href="#musings">Musings</a> /
-                    <a href="#voicemail">Voicemail</a> /
+                    <a href="#oddities">Oddities</a> /
                     <a href="#links-i-like">Links I Like</a> /
                     <a href="#about">About</a>
                     <script>
@@ -275,12 +275,15 @@
                             </div>
                         </span>
                         <script>
-                            const closeErrorButton = document.getElementById("closeErrorButton");
-                            closeErrorButton.onclick = function() {
-                                const errorElement = document.getElementById("error");
-                                errorElement.style.opacity = 0;
-                                setTimeout(() => errorElement.style.display = "none", 1000);
+                            const errorMessageClosure = function() {
+                                const closeErrorButton = document.getElementById("closeErrorButton");
+                                closeErrorButton.onclick = function() {
+                                    const errorElement = document.getElementById("error");
+                                    errorElement.style.opacity = 0;
+                                    setTimeout(() => errorElement.style.display = "none", 1000);
+                                };
                             };
+                            errorMessageClosure();
                         </script>
                         <span class="errorButtons">
                             <a href="https://www.microsoft.com/en-us/software-download/windows11" 
@@ -503,12 +506,18 @@
                 </details>
             </section>
 
-            <section id="voicemail">
+            <section id="oddities">
                 <hr>
-                <h2>Please leave a message after the beep!</h2>
+                <h2>Odds and ends!</h2>
                 <hr>
+
+                <details name="preventOpeningMultipleAtTheSameTime">
+                    <summary>
+                        <span>Please leave a message after the beep!</span>
+                    </summary>
+
                     <p>
-                        Hi, you have reached Jackson's phone. Unfortunately, I'm not available at the moment so please leave a message after the beep.
+                        You have reached Jackson's phone. Unfortunately, I'm not available at the moment so please leave a message after the beep.
                     </p>
                     <p>
                         Click the button to record your 15 second message. Your message will be played back to you before sending.
@@ -533,48 +542,24 @@
                         </form>
                     </p>
                     <script>
-                        const VOICEMAIL_LENGTH_SECONDS = 15;
+                        const voicemailClosure = function() {
+                            const VOICEMAIL_LENGTH_SECONDS = 15;
 
-                        const updateButton = function(text, color, disabled) {
-                            const voicemailButton = document.getElementById('voicemailButton');
-                            voicemailButton.disabled = false;
-                            voicemailButton.disabled = disabled;
+                            const updateButton = function(text, color, disabled) {
+                                const voicemailButton = document.getElementById('voicemailButton');
+                                voicemailButton.disabled = false;
+                                voicemailButton.disabled = disabled;
 
-                            const voicemailButtonText = voicemailButton.children[0];
-                            voicemailButtonText.innerHTML = text;
-                            voicemailButtonText.style.color = color;
+                                const voicemailButtonText = voicemailButton.children[0];
+                                voicemailButtonText.innerHTML = text;
+                                voicemailButtonText.style.color = color;
+                            }.bind(this);
+                            
+                            const voicemailForm = document.getElementById('voicemailForm');
 
-                        }.bind(this);
-                        
-                        const voicemailForm = document.getElementById('voicemailForm');
-                    
-                        const playFrequencies = function(beepFrequencies, msBeepDuration, runAfter) {
-                            const audioContext = new AudioContext();
-                            const oscillators = [];
-                            for (beep of beepFrequencies) {
-                                const oscillator = audioContext.createOscillator();
-                                oscillator.type = "sine";
-                                oscillator.frequency.value = beep;
-
-                                const gainNode = audioContext.createGain();
-                                oscillator.connect(gainNode);
-
-                                gainNode.connect(audioContext.destination);
-                                gainNode.gain.value = 0.2;
-
-                                oscillators.push(oscillator);
-                            }
-                            oscillators.forEach(o => o.start());
-                            setTimeout(function () {
-                                oscillators.forEach(o => o.stop());
-                                if (runAfter) runAfter();
-                            }, msBeepDuration);
-                        };
-
-                        document.getElementById('voicemailButton').onclick = e => {
-                            updateButton("Recording", "orange", true);
-                            navigator.mediaDevices.getUserMedia({ audio: true })
-                                .then(
+                            document.getElementById('voicemailButton').onclick = e => {
+                                updateButton("Recording", "orange", true);
+                                navigator.mediaDevices.getUserMedia({ audio: true }).then(
                                     function(stream) {
                                         const audioRecorder = new MediaRecorder(stream, {audioBitsPerSecond: 16000});
                                         audioRecorder.ondataavailable = e => {
@@ -622,7 +607,7 @@
                                                     else {
                                                         updateButton("Voicemail sent!", "green", true);
                                                     }
-                                                    playFrequencies([350, 440], 200);
+                                                    utilFunctions.playBeep([350, 440], 200);
                                                 }
                                             );
                                             updateButton("Playing Voicemail", "orange", true);
@@ -638,16 +623,75 @@
                                             
                                         };
 
-                                        playFrequencies([350, 440], 400);
+                                        utilFunctions.playBeep([350, 440], 400);
                                         audioRecorder.start();
                                         setTimeout(() => {
-                                            playFrequencies([350, 440], 400);
+                                            utilFunctions.playBeep([350, 440], 400);
                                             audioRecorder.stop();
                                         }, VOICEMAIL_LENGTH_SECONDS * 1000);
                                     }.bind(this)
                                 );
-                        }
+                            }
+                        };
+                        voicemailClosure();
                     </script>
+                </details>
+
+                <details name="preventOpeningMultipleAtTheSameTime">
+                    <summary>
+                        <span>Boardgame Timer</span>
+                    </summary>
+                    <p>
+                        Click the button to start the timer. Click again to reset. The timer will run for 
+                        <input id="boardgameTimerLengthInput" type="number" value="90"> seconds.
+                    </p>
+                    <form style="display: flex; align-items: center;">
+                        <button id='boardgameTimerButton' type="button"
+                                style="width: 100%;">
+                            <h1>Click To Start</h1>
+                        </button>
+                        <script>
+                            const boardgameTimerClosure = function () {
+                                const updateButton = function(text, color, disabled) {
+                                    const button = document.getElementById('boardgameTimerButton');
+
+                                    const buttonText = button.children[0];
+                                    buttonText.innerHTML = text;
+                                    buttonText.style.color = color;
+                                }.bind(this);
+
+                                let remainingTime;
+
+                                const runTimerFunction = function() {    
+                                    setTimeout(
+                                        function() {
+                                            if (remainingTime > 0) {
+                                                updateButton(remainingTime, "black");
+                                                remainingTime -= 1;                                           
+                                            } else {
+                                                updateButton("Time's Up!", "red");
+                                                utilFunctions.playBeep([146.83, 293.66, 440], 500);
+                                            }
+                                            runTimerFunction();
+                                        },
+                                        1000
+                                    );
+                                };
+
+                                let timerStarted = false;
+                                document.getElementById('boardgameTimerButton').onclick = e => {
+                                    remainingTime = parseInt( // ie. Get from field
+                                        document.getElementById("boardgameTimerLengthInput").value
+                                    );
+                                    if (!timerStarted)
+                                        runTimerFunction();
+                                    timerStarted = true;
+                                }
+                            };
+                            boardgameTimerClosure();
+                        </script>
+                    </form>
+                </details>
             </section>
 
             <section id="links-i-like">
@@ -776,22 +820,25 @@
                     A wise man is he who disables Javascript
                 </h3>
                 <script>
-                    const quotes = [
-                        "Does one need to smell flowers more efficiently?",
-                        "Technology is not just utility.",
-                        "Only the machinery hurtful to commonality.",
-                        "Made for the sake of making.", 
-                        "If we want parties then we need to throw them.", 
-                        "\"Never try anything that is difficult\" - Jon Bois",
-                        "Self checkouts are unpaid labour for the bourgeoisie.",
-                        "I must not phone in bed, phone in bed is the mind killer.",
-                        "Can I pay less in rent if I spend most of the time living in my own head?",
-                        "Best viewed with low expectations!",
-                        "Lol, Lmao even!",
-                        "We must kill the dreams of spring.",
-                    ];
-                    const randomlySelectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                    document.getElementById('footerQuoteH2Element').innerHTML = randomlySelectedQuote;
+                    const quoteClosure = function() {
+                        const quotes = [
+                            "Does one need to smell flowers more efficiently?",
+                            "Technology is not just utility.",
+                            "Only the machinery hurtful to commonality.",
+                            "Made for the sake of making.", 
+                            "If we want parties then we need to throw them.", 
+                            "\"Never try anything that is difficult\" - Jon Bois",
+                            "Self checkouts are unpaid labour for the bourgeoisie.",
+                            "I must not phone in bed, phone in bed is the mind killer.",
+                            "Can I pay less in rent if I spend most of the time living in my own head?",
+                            "Best viewed with low expectations!",
+                            "Lol, Lmao even!",
+                            "We must kill the dreams of spring.",
+                        ];
+                        const randomlySelectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                        document.getElementById('footerQuoteH2Element').innerHTML = randomlySelectedQuote;
+                    };
+                    quoteClosure();
                 </script>
                 <h3 style="margin-bottom: 0;">JacksonKerr2@gmail.com</h3>
                 <a href="https://jacksonkerr.github.io">github-pages</a>
@@ -799,5 +846,32 @@
                 <a href="https://jacksonkerr.nfshost.com/">nearly-free-speech</a>
             </footer>
         </main> 
+
+        <script>
+            const utilFunctions = { 
+                playBeep: function(beepFrequencies, msBeepDuration, runAfter) {
+                    const audioContext = new AudioContext();
+                    const oscillators = [];
+                    for (beep of beepFrequencies) {
+                        const oscillator = audioContext.createOscillator();
+                        oscillator.type = "sine";
+                        oscillator.frequency.value = beep;
+
+                        const gainNode = audioContext.createGain();
+                        oscillator.connect(gainNode);
+
+                        gainNode.connect(audioContext.destination);
+                        gainNode.gain.value = 0.2;
+
+                        oscillators.push(oscillator);
+                    }
+                    oscillators.forEach(o => o.start());
+                    setTimeout(function () {
+                        oscillators.forEach(o => o.stop());
+                        if (runAfter) runAfter();
+                    }, msBeepDuration);
+                },
+            };
+        </script>
     </body>
 </html>
