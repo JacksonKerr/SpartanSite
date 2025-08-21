@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=editSite
+Comment=
+Exec=codium .
+Icon=go-home
+Path=/home/jackson/Desktop/JacksonKerr.github.io
+Terminal=false
+StartupNotify=false
