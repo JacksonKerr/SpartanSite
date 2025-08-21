@@ -63,8 +63,11 @@
             }
             section { 
                 display: none;
-                margin-top: -240px;
-                padding-top: 250px;
+                
+                /* This fuckery stops the page from jumping down when the navbar is used 
+                   for reasons that I can't be bothered explaining so don't ask.*/
+                margin-top: -1000px; 
+                padding-top: 1000px;
                 
                 transition: 0.35s;
                 @starting-style {
@@ -86,20 +89,25 @@
 
     <body>
         <main id="mainPage" style="min-height: 100%;">
-            <div style="text-align:center">
-                <a href="https://baccyflap.com/noai/?prv&s=jks" target="_top">« prev</a> |
-                <a href="https://baccyflap.com/noai" target="_blank">no ai webring</a>
-                <a style="font-size:60%" href="https://baccyflap.com/noai/?rnd" target="_top">(random)</a> |
-                <a href="https://baccyflap.com/noai/?nxt&s=jks" target="_top">next »</a>
-            </div> 
-
+            <style>.webringNavigation { align-content: center; flex-shrink: 0; }</style>
+            <div style="display: flex; font-family: monospace;">
+                <a class="webringNavigation" href="https://baccyflap.com/noai/?prv&s=jks">« Prev</a> 
+                <div style="text-align: center; flex-grow: 1; flex-shrink: 1;">
+                    <a href="https://baccyflap.com/noai">No AI Webring</a>
+                    <br/>
+                    <a href="https://baccyflap.com/noai/?rnd">Click for a random website!</a> 
+                </div>
+                <a class="webringNavigation" href="https://baccyflap.com/noai/?nxt&s=jks">Next »</a>
+            </div>
+                
             <header>
                 <style>
                     #headerLogo { 
                         transition: 0.8s; transform: rotate(0deg); 
                         width: 115px; 
                         height: 115px; 
-                        margin: auto; 
+                        margin: auto;
+                        margin-top: 20px;
                         padding: 5px; 
                         border: solid #ff7700 5px; 
                         line-height: 31pt;
