@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>🐙</text></svg>">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22none%22 stroke=%22%23ff7700%22 stroke-width=%224%22/></svg>">
+
         <title>Jackson Kerr's Site</title>
         <style>
             /* Declare these explicitly otherwise they differ per browser */
@@ -40,18 +40,28 @@
                 100% { transform: rotate(4deg); }
             }
 
+            :root {
+                --xp-grey: #c5c9c4;
+                --site-orange: #ff7700;
+                --off-black: #222222;
+            }
+
             body {
                 margin: 8px; /* This is the default for most browsers anyway */
-                color: #222222;
-                background-color: #222222;
+                color: var(--off-black);
+                /* This has to be light enough to read text on due to an opera mini bug 
+                    I miss #222222 :( */
+                background-color: var(--xp-grey); 
                 line-height: 14pt;
             }
             main {
-                background-color: #EEEEEE;
-                padding: 20px;
-                margin: auto; 
                 max-width: 750px;
-
+                margin: auto; 
+                padding: 20px;
+                
+                background-color: #EEEEEE;
+                border-radius: 5px;
+                
                 transition: 0.8s ease-out;
                 rotate: 0deg;
                 scale: initial;
@@ -66,8 +76,8 @@
                 
                 /* This fuckery stops the page from jumping down when the navbar is used 
                    for reasons that I can't be bothered explaining so don't ask.*/
-                margin-top: -1000px; 
-                padding-top: 1000px;
+                margin-top: -329px; 
+                padding-top: 329px;
                 
                 transition: 0.35s;
                 @starting-style {
@@ -88,7 +98,7 @@
     </head>
 
     <body>
-        <main id="mainPage" style="min-height: 100%;">
+        <main id="mainPage">
             <style>.webringNavigation { align-content: center; flex-shrink: 0; }</style>
             <div style="display: flex; font-family: monospace;">
                 <a class="webringNavigation" href="https://baccyflap.com/noai/?prv&s=jks">« Prev</a> 
@@ -109,7 +119,7 @@
                         margin: auto;
                         margin-top: 20px;
                         padding: 5px; 
-                        border: solid #ff7700 5px; 
+                        border: solid var(--site-orange) 5px; 
                         line-height: 31pt;
                     }
                     #headerLogo:hover { 
@@ -154,7 +164,7 @@
                             100% { transform: translate(0px, 0px) }
                         }
                     #error {
-                        background-color: #c5c9c4; 
+                        background-color: var(--xp-grey); 
                         box-shadow: 1px 1px 1px 1px black;
                         padding: 3px; 
                         border-left: solid 2px #d3d3d3;
@@ -178,7 +188,7 @@
                         <b>Virus Warning!</b>
                         <style>
                             .errorHeaderButton {
-                                background-color: #c5c9c4;
+                                background-color: var(--xp-grey);
                                 color: black;
 
                                 outline: solid black 1px;
@@ -322,12 +332,6 @@
                 * How 2 lern gud
                 * This all looks so difficult!?!?!
                     * A guide for the brainrotten on site creation.
-
-                tempref:
-                * Make favicon an orange square using minimal svg.
-                * Make background correct color on opera mini.
-                    - Make body off white and then add another element on top
-                      to do the grey. I think that'll sort it.
                 -->
 
                 <hr>
@@ -882,7 +886,7 @@
             </section>
 
             <footer style="text-align: center;">
-                <h3 id="footerQuoteH2Element" style="padding: 8px; border: solid #ff7700 5px;">
+                <h3 id="footerQuoteH2Element" style="padding: 8px; border: solid var(--site-orange) 5px;">
                     A wise man is he who disables Javascript
                 </h3>
                 <script>
