@@ -87,6 +87,8 @@
             }
             section:target { display: block; }
             nav { font-size: 25px; line-height: 25px;}
+            a { transition: 0.5s; color: none; }
+            a:hover { transition: 0.5s; color: var(--site-orange); }
             h2, h3, nav { text-align: center; }
             h2 { animation: rotateShake 5s infinite linear; }
             table { width: 100% }
@@ -100,8 +102,18 @@
 
     <body>
         <main id="mainPage">
-            <style>.webringNavigation { align-content: center; flex-shrink: 0; }</style>
-            <div style="display: flex; font-family: monospace;">
+            <style>
+                .webringNavigation { align-content: center; flex-shrink: 0; }
+                #webringDiv  {
+                    display: flex;
+                    font-family: monospace;
+                    padding: 10px;
+                    border: solid black 1px;
+                    border-radius: 5px;
+                    transition: 0.8s; 
+                }
+            </style>
+            <div id="webringDiv">
                 <a class="webringNavigation" href="https://baccyflap.com/noai/?prv&s=jks">« Prev</a> 
                 <div style="text-align: center; flex-grow: 1; flex-shrink: 1;">
                     <a href="https://baccyflap.com/noai">The No AI Webring</a>
@@ -114,7 +126,8 @@
             <header>
                 <style>
                     #headerLogo { 
-                        transition: 0.8s; transform: rotate(0deg); 
+                        transition: 0.8s; 
+                        transform: rotate(0deg); 
                         width: 115px; 
                         height: 115px; 
                         margin: auto;
