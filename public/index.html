@@ -61,15 +61,6 @@
                 
                 background-color: #EEEEEE;
                 border-radius: 5px;
-                
-                transition: 0.8s ease-out;
-                rotate: 0deg;
-                scale: initial;
-                @starting-style {
-                    rotate: 900deg;
-                    scale: -100%;
-                    translate: 0vw 150vh;
-                }
             }
             section { 
                 display: none;
@@ -1068,5 +1059,18 @@
                 },
             };
         </script>
+
+        <style>
+            main {
+                transition: 0.8s ease-out;
+                rotate: 0deg;
+                scale: initial;
+                @starting-style {
+                    rotate: 900deg;
+                    scale: -100%;
+                    translate: 0vw 150vh;
+                }
+            }
+        </style>
     </body>
 </html>
