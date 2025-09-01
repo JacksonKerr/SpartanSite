@@ -4,7 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22none%22 stroke=%22%23ff7700%22 stroke-width=%224%22/></svg>">
+        <title>Jackson Kerr's Site</title>
+        <meta name="description" content="Just what it says on the tin">
 
+        <!-- PWA Stuff -->
+        <base href="/" target="_blank">
         <link rel="manifest" 
             href='data:application/manifest+json,
             {
@@ -27,11 +31,70 @@
                     "sizes": "512x512"
                     }
                 ],
-                "start_url": "",
+                "scope": ".",
+                "start_url": ".",
                 "display": "fullscreen"
-            }' />
+            }' 
+        />
+        <!-- tempref -->
+        <script id="worker1" type="javascript/worker">
+            let cacheName = "my-first-pwa";
+            let filesToCache = ["/", "/index.html"];
+            self.addEventListener(
+                "install", 
+                (e) => {
+                    e.waitUntil(
+                        caches.open(cacheName)
+                        .then(
+                            function (cache) {
+                                return cache.addAll(filesToCache);
+                            }
+                        )
+                    );
+                }
+            );
+            self.addEventListener("fetch", (e) => {
+                e.respondWith(
+                    caches.match(e.request)
+                    .then((response) => {
+                        return response || fetch(e.request);
+                    }
+                )
+            );
+            });
 
-        <title>Jackson Kerr's Site</title>
+            const addResourcesToCache = async (resources) => {
+                const cache = await caches.open("v1");
+                await cache.addAll(resources);
+            };
+
+            self.addEventListener(
+                "install",
+                (event) => {
+                    event.waitUntil(
+                        addResourcesToCache(["/",]),
+                    );
+                }
+            );
+        </script>
+        <script>
+            var blob = new Blob([
+                document.querySelector('#worker1').textContent
+            ], { type: "text/javascript" })
+
+            // Note: window.webkitURL.createObjectURL() in Chrome 10+.
+            var worker = new Worker(
+                window.URL.createObjectURL(blob)
+            );
+            worker.onmessage = function(e) {
+                console.log("Received: " + e.data);
+            }
+            worker.postMessage("hello"); // Start the worker.
+
+
+
+        </script>
+
         <style>
             /* Declare these explicitly otherwise they differ per browser */
             h1 { font-size: 32px; }
@@ -190,6 +253,34 @@
            
             <section id="home">
                 <h2>You have arrived!</h2>
+
+
+
+                <div>
+                    <button id="installApp">Install</button>
+                    <script>
+                        let deferredPrompt;
+                        window.addEventListener('beforeinstallprompt', (e) => {
+                            deferredPrompt = e;
+                        });
+
+                        const installApp = document.getElementById('installApp');
+                        installApp.addEventListener('click', async () => {
+                            if (deferredPrompt !== null) {
+                                deferredPrompt.prompt();
+                                const { outcome } = await deferredPrompt.userChoice;
+                                if (outcome === 'accepted') {
+                                    deferredPrompt = null;
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+
+
+
+
+
                 <span style="text-align: center;">
                     <p>Welcome to my little corner of the internet!</p>
                     <p>Feel free to have a look around.</p>
