@@ -7,100 +7,6 @@
         <title>Jackson Kerr's Site</title>
         <meta name="description" content="Just what it says on the tin">
 
-        <!-- PWA Stuff -->
-        <link rel="manifest" 
-            href='data:application/manifest+json,
-            {
-                "short_name": "Jackson Kerr`s Site",
-                "name": "Jackson`s Site",
-                "icons": [
-                    {
-                        "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABhJREFUeJxj+F/O8B8fZgATOMDQUoAPAwCCx0TNToJ1vgAAAABJRU5ErkJggg==",
-                        "type": "image/png",
-                        "sizes": "8x8"
-                    },
-                    {
-                    "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABhJREFUeJxj+F/O8B8fZgATOMDQUoAPAwCCx0TNToJ1vgAAAABJRU5ErkJggg==",
-                    "type": "image/png",
-                    "sizes": "192x192"
-                    },
-                    {
-                    "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABhJREFUeJxj+F/O8B8fZgATOMDQUoAPAwCCx0TNToJ1vgAAAABJRU5ErkJggg==",
-                    "type": "image/png",
-                    "sizes": "512x512"
-                    }
-                ],
-                "scope": "/",
-                "start_url": ".",
-                "display": "fullscreen"
-            }' 
-        />
-        <!-- tempref -->
-        <script id="worker1" type="javascript/worker">
-            debugger;
-            const cacheName = "cache1"; // Change value to force update
-
-            self.addEventListener("install", event => {
-                // Kick out the old service worker
-                self.skipWaiting();
-
-                event.waitUntil(
-                    caches.open(cacheName).then(cache => {
-                        return cache.addAll(["/",]);
-                    })
-                );
-            });
-
-            self.addEventListener("activate", event => {
-                // Delete any non-current cache
-                event.waitUntil(
-                    caches.keys().then(keys => {
-                        Promise.all(
-                            keys.map(key => {
-                                if (![cacheName].includes(key)) {
-                                    return caches.delete(key);
-                                }
-                            })
-                        )
-                    })
-                );
-            });
-
-            // Offline-first, cache-first strategy
-            // Kick off two asynchronous requests, one to the cache and one to the network
-            // If there's a cached version available, use it, but fetch an update for next time.
-            // Gets data on screen as quickly as possible, then updates once the network has returned the latest data. 
-            self.addEventListener("fetch", event => {
-                event.respondWith(
-                    caches.open(cacheName).then(cache => {
-                        return cache.match(event.request).then(response => {
-                            return response || fetch(event.request).then(networkResponse => {
-                                cache.put(event.request, networkResponse.clone());
-                                return networkResponse;
-                            });
-                        })
-                    })
-                );
-            });
-        </script>
-        <script>
-            var blob = new Blob([
-                document.querySelector('#worker1').textContent
-            ], { type: "text/javascript" })
-
-            // Note: window.webkitURL.createObjectURL() in Chrome 10+.
-            var worker = new Worker(
-                window.URL.createObjectURL(blob)
-            );
-            worker.onmessage = function(e) {
-                console.log("Received: " + e.data);
-            }
-            worker.postMessage("hello"); // Start the worker.
-
-
-
-        </script>
-
         <style>
             /* Declare these explicitly otherwise they differ per browser */
             h1 { font-size: 32px; }
@@ -259,33 +165,6 @@
            
             <section id="home">
                 <h2>You have arrived!</h2>
-
-
-
-                <div>
-                    <button id="installApp">Install</button>
-                    <script>
-                        let deferredPrompt;
-                        window.addEventListener('beforeinstallprompt', (e) => {
-                            deferredPrompt = e;
-                        });
-
-                        const installApp = document.getElementById('installApp');
-                        installApp.addEventListener('click', async () => {
-                            if (deferredPrompt !== null) {
-                                deferredPrompt.prompt();
-                                const { outcome } = await deferredPrompt.userChoice;
-                                if (outcome === 'accepted') {
-                                    deferredPrompt = null;
-                                }
-                            }
-                        });
-                    </script>
-                </div>
-
-
-
-
 
                 <span style="text-align: center;">
                     <p>Welcome to my little corner of the internet!</p>
